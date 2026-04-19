@@ -1,0 +1,1578 @@
+openapi: 3.0.3
+info:
+  title: Amazon Resilience Hub
+  description: AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications, assessing against RTO and RPO targets and providing actionable recommendations.
+  version: '2020-04-30'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/contact-us/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-generated-from: documentation
+servers:
+  - url: https://resiliencehub.amazonaws.com
+    description: Amazon Resilience Hub API endpoint
+paths:
+  /create-app:
+    post:
+      operationId: createApp
+      summary: Amazon Resilience Hub Create App
+      description: Creates an AWS Resilience Hub application. A Resilience Hub application is a collection of AWS resources structured to prevent and recover AWS application disruptions.
+      tags:
+        - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAppRequest'
+            examples:
+              createAppRequest:
+                summary: Default createApp request
+                x-microcks-default: true
+                value:
+                  name: my-resilient-app
+                  description: My application for resilience testing
+                  policyArn: arn:aws:resiliencehub:us-east-1:123456789012:resiliency-policy/abc123
+      responses:
+        '200':
+          description: Application created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAppResponse'
+              examples:
+                createApp200:
+                  summary: Default createApp 200 response
+                  x-microcks-default: true
+                  value:
+                    app:
+                      appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-resilient-app
+                      name: my-resilient-app
+                      complianceStatus: NotAssessed
+                      creationTime: '2026-04-19T14:30:00Z'
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /describe-app:
+    post:
+      operationId: describeApp
+      summary: Amazon Resilience Hub Describe App
+      description: Describes an AWS Resilience Hub application.
+      tags:
+        - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppArnRequest'
+            examples:
+              describeAppRequest:
+                summary: Default describeApp request
+                x-microcks-default: true
+                value:
+                  appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+      responses:
+        '200':
+          description: Application description retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAppResponse'
+              examples:
+                describeApp200:
+                  summary: Default describeApp 200 response
+                  x-microcks-default: true
+                  value:
+                    app:
+                      appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+                      name: my-app
+                      complianceStatus: PolicyBreached
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /list-apps:
+    get:
+      operationId: listApps
+      summary: Amazon Resilience Hub List Apps
+      description: Lists your Resilience Hub applications.
+      tags:
+        - Applications
+      parameters:
+        - name: appArn
+          in: query
+          schema:
+            type: string
+          description: The Amazon Resource Name (ARN) of the app.
+        - name: maxResults
+          in: query
+          schema:
+            type: integer
+          description: Maximum number of results to include in the response.
+          example: 20
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Null, or the token from a previous call to get the next set of results.
+        - name: name
+          in: query
+          schema:
+            type: string
+          description: The name for the one of the listed applications.
+      responses:
+        '200':
+          description: Applications listed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAppsResponse'
+              examples:
+                listApps200:
+                  summary: Default listApps 200 response
+                  x-microcks-default: true
+                  value:
+                    appSummaries: []
+                    nextToken: null
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /delete-app:
+    delete:
+      operationId: deleteApp
+      summary: Amazon Resilience Hub Delete App
+      description: Deletes an AWS Resilience Hub application. This is a destructive action that cannot be undone.
+      tags:
+        - Applications
+      parameters:
+        - name: appArn
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The Amazon Resource Name (ARN) of the application.
+        - name: forceDelete
+          in: query
+          schema:
+            type: boolean
+          description: A boolean option to override the failure when deleting an unprotected app.
+      responses:
+        '200':
+          description: Application deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAppResponse'
+              examples:
+                deleteApp200:
+                  summary: Default deleteApp 200 response
+                  x-microcks-default: true
+                  value:
+                    appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /start-app-assessment:
+    post:
+      operationId: startAppAssessment
+      summary: Amazon Resilience Hub Start App Assessment
+      description: Creates a new application assessment for an application.
+      tags:
+        - Assessments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartAppAssessmentRequest'
+            examples:
+              startAppAssessmentRequest:
+                summary: Default startAppAssessment request
+                x-microcks-default: true
+                value:
+                  appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+                  appVersion: release
+                  assessmentName: my-assessment
+      responses:
+        '200':
+          description: Assessment started successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartAppAssessmentResponse'
+              examples:
+                startAppAssessment200:
+                  summary: Default startAppAssessment 200 response
+                  x-microcks-default: true
+                  value:
+                    assessment:
+                      appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+                      assessmentArn: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
+                      assessmentStatus: Pending
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /describe-app-assessment:
+    post:
+      operationId: describeAppAssessment
+      summary: Amazon Resilience Hub Describe App Assessment
+      description: Describes an assessment for an AWS Resilience Hub application.
+      tags:
+        - Assessments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentArnRequest'
+            examples:
+              describeAppAssessmentRequest:
+                summary: Default describeAppAssessment request
+                x-microcks-default: true
+                value:
+                  assessmentArn: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
+      responses:
+        '200':
+          description: Assessment description retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAppAssessmentResponse'
+              examples:
+                describeAppAssessment200:
+                  summary: Default describeAppAssessment 200 response
+                  x-microcks-default: true
+                  value:
+                    assessment:
+                      assessmentArn: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
+                      assessmentStatus: Success
+                      complianceStatus: PolicyMet
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /list-app-assessments:
+    get:
+      operationId: listAppAssessments
+      summary: Amazon Resilience Hub List App Assessments
+      description: Lists the assessments for an AWS Resilience Hub application.
+      tags:
+        - Assessments
+      parameters:
+        - name: appArn
+          in: query
+          schema:
+            type: string
+          description: Amazon Resource Name (ARN) of the application.
+        - name: assessmentName
+          in: query
+          schema:
+            type: string
+          description: The name for the assessment.
+        - name: assessmentStatus
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - Pending
+                - InProgress
+                - Failed
+                - Success
+          description: The current status of the assessment for the resiliency policy.
+        - name: maxResults
+          in: query
+          schema:
+            type: integer
+          example: 20
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Assessments listed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAppAssessmentsResponse'
+              examples:
+                listAppAssessments200:
+                  summary: Default listAppAssessments 200 response
+                  x-microcks-default: true
+                  value:
+                    assessmentSummaries: []
+                    nextToken: null
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /create-resiliency-policy:
+    post:
+      operationId: createResiliencyPolicy
+      summary: Amazon Resilience Hub Create Resiliency Policy
+      description: Creates a resiliency policy for an application.
+      tags:
+        - Resiliency Policies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateResiliencyPolicyRequest'
+            examples:
+              createResiliencyPolicyRequest:
+                summary: Default createResiliencyPolicy request
+                x-microcks-default: true
+                value:
+                  policyName: my-resilience-policy
+                  tier: MissionCritical
+                  policy:
+                    AZ:
+                      rtoInSecs: 300
+                      rpoInSecs: 60
+                    Hardware:
+                      rtoInSecs: 900
+                      rpoInSecs: 300
+      responses:
+        '200':
+          description: Resiliency policy created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateResiliencyPolicyResponse'
+              examples:
+                createResiliencyPolicy200:
+                  summary: Default createResiliencyPolicy 200 response
+                  x-microcks-default: true
+                  value:
+                    policy:
+                      policyArn: arn:aws:resiliencehub:us-east-1:123456789012:resiliency-policy/abc123
+                      policyName: my-resilience-policy
+                      tier: MissionCritical
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /describe-resiliency-policy:
+    post:
+      operationId: describeResiliencyPolicy
+      summary: Amazon Resilience Hub Describe Resiliency Policy
+      description: Describes a specified resiliency policy for an AWS Resilience Hub application.
+      tags:
+        - Resiliency Policies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PolicyArnRequest'
+            examples:
+              describeResiliencyPolicyRequest:
+                summary: Default describeResiliencyPolicy request
+                x-microcks-default: true
+                value:
+                  policyArn: arn:aws:resiliencehub:us-east-1:123456789012:resiliency-policy/abc123
+      responses:
+        '200':
+          description: Resiliency policy described.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeResiliencyPolicyResponse'
+              examples:
+                describeResiliencyPolicy200:
+                  summary: Default describeResiliencyPolicy 200 response
+                  x-microcks-default: true
+                  value:
+                    policy:
+                      policyArn: arn:aws:resiliencehub:us-east-1:123456789012:resiliency-policy/abc123
+                      policyName: my-resilience-policy
+                      tier: MissionCritical
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /list-resiliency-policies:
+    get:
+      operationId: listResiliencyPolicies
+      summary: Amazon Resilience Hub List Resiliency Policies
+      description: Lists the resiliency policies for the Resilience Hub applications.
+      tags:
+        - Resiliency Policies
+      parameters:
+        - name: policyName
+          in: query
+          schema:
+            type: string
+          description: The name of the policy
+        - name: maxResults
+          in: query
+          schema:
+            type: integer
+          example: 20
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Resiliency policies listed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResiliencyPoliciesResponse'
+              examples:
+                listResiliencyPolicies200:
+                  summary: Default listResiliencyPolicies 200 response
+                  x-microcks-default: true
+                  value:
+                    resiliencyPolicies: []
+                    nextToken: null
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /list-alarm-recommendations:
+    post:
+      operationId: listAlarmRecommendations
+      summary: Amazon Resilience Hub List Alarm Recommendations
+      description: Lists the alarm recommendations for an AWS Resilience Hub application.
+      tags:
+        - Recommendations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentArnPaginationRequest'
+            examples:
+              listAlarmRecommendationsRequest:
+                summary: Default listAlarmRecommendations request
+                x-microcks-default: true
+                value:
+                  assessmentArn: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
+                  maxResults: 20
+      responses:
+        '200':
+          description: Alarm recommendations listed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRecommendationsResponse'
+              examples:
+                listAlarmRecommendations200:
+                  summary: Default listAlarmRecommendations 200 response
+                  x-microcks-default: true
+                  value:
+                    alarmRecommendations: []
+                    nextToken: null
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /list-sop-recommendations:
+    post:
+      operationId: listSopRecommendations
+      summary: Amazon Resilience Hub List SOP Recommendations
+      description: Lists the standard operating procedure (SOP) recommendations for the Resilience Hub applications.
+      tags:
+        - Recommendations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentArnPaginationRequest'
+            examples:
+              listSopRecommendationsRequest:
+                summary: Default listSopRecommendations request
+                x-microcks-default: true
+                value:
+                  assessmentArn: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
+      responses:
+        '200':
+          description: SOP recommendations listed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRecommendationsResponse'
+              examples:
+                listSopRecommendations200:
+                  summary: Default listSopRecommendations 200 response
+                  x-microcks-default: true
+                  value:
+                    sopRecommendations: []
+                    nextToken: null
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /list-test-recommendations:
+    post:
+      operationId: listTestRecommendations
+      summary: Amazon Resilience Hub List Test Recommendations
+      description: Lists the test recommendations for the Resilience Hub application.
+      tags:
+        - Recommendations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentArnPaginationRequest'
+            examples:
+              listTestRecommendationsRequest:
+                summary: Default listTestRecommendations request
+                x-microcks-default: true
+                value:
+                  assessmentArn: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
+      responses:
+        '200':
+          description: Test recommendations listed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRecommendationsResponse'
+              examples:
+                listTestRecommendations200:
+                  summary: Default listTestRecommendations 200 response
+                  x-microcks-default: true
+                  value:
+                    testRecommendations: []
+                    nextToken: null
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /add-draft-app-version-resource-mappings:
+    post:
+      operationId: addDraftAppVersionResourceMappings
+      summary: Amazon Resilience Hub Add Draft App Version Resource Mappings
+      description: Adds the source of resource-maps to the draft version of an application.
+      tags:
+        - Resource Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddResourceMappingsRequest'
+            examples:
+              addDraftResourceMappingsRequest:
+                summary: Default addDraftAppVersionResourceMappings request
+                x-microcks-default: true
+                value:
+                  appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+                  resourceMappings: []
+      responses:
+        '200':
+          description: Resource mappings added.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddResourceMappingsResponse'
+              examples:
+                addDraftResourceMappings200:
+                  summary: Default addDraftAppVersionResourceMappings 200 response
+                  x-microcks-default: true
+                  value:
+                    appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+                    appVersion: draft
+                    resourceMappings: []
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /publish-app-version:
+    post:
+      operationId: publishAppVersion
+      summary: Amazon Resilience Hub Publish App Version
+      description: Publishes a new version of a specific Resilience Hub application.
+      tags:
+        - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppArnRequest'
+            examples:
+              publishAppVersionRequest:
+                summary: Default publishAppVersion request
+                x-microcks-default: true
+                value:
+                  appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+      responses:
+        '200':
+          description: App version published.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishAppVersionResponse'
+              examples:
+                publishAppVersion200:
+                  summary: Default publishAppVersion 200 response
+                  x-microcks-default: true
+                  value:
+                    appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+                    appVersion: '1'
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /import-resources-to-draft-app-version:
+    post:
+      operationId: importResourcesToDraftAppVersion
+      summary: Amazon Resilience Hub Import Resources to Draft App Version
+      description: Imports resources to Resilience Hub application draft version from CloudFormation stacks, resource-groups, or application registry apps.
+      tags:
+        - Resource Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportResourcesRequest'
+            examples:
+              importResourcesRequest:
+                summary: Default importResourcesToDraftAppVersion request
+                x-microcks-default: true
+                value:
+                  appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+                  terraformSources: []
+      responses:
+        '200':
+          description: Resources imported to draft version.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportResourcesResponse'
+              examples:
+                importResources200:
+                  summary: Default importResourcesToDraftAppVersion 200 response
+                  x-microcks-default: true
+                  value:
+                    appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+                    appVersion: draft
+                    status: Pending
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /resolve-app-version-resources:
+    post:
+      operationId: resolveAppVersionResources
+      summary: Amazon Resilience Hub Resolve App Version Resources
+      description: Resolves the resources for an application version.
+      tags:
+        - Resource Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppVersionRequest'
+            examples:
+              resolveAppVersionResourcesRequest:
+                summary: Default resolveAppVersionResources request
+                x-microcks-default: true
+                value:
+                  appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+                  appVersion: release
+      responses:
+        '200':
+          description: Resources resolved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResolveResourcesResponse'
+              examples:
+                resolveAppVersionResources200:
+                  summary: Default resolveAppVersionResources 200 response
+                  x-microcks-default: true
+                  value:
+                    appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+                    appVersion: release
+                    resolutionId: abc123
+                    status: Pending
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /tags/{resourceArn}:
+    post:
+      operationId: tagResource
+      summary: Amazon Resilience Hub Tag Resource
+      description: Applies one or more tags to a resource.
+      tags:
+        - Tags
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The Amazon Resource Name (ARN) of the resource.
+          example: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceRequest'
+            examples:
+              tagResourceRequest:
+                summary: Default tagResource request
+                x-microcks-default: true
+                value:
+                  tags:
+                    Environment: Production
+                    Team: Platform
+      responses:
+        '200':
+          description: Tags applied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyResponse'
+              examples:
+                tagResource200:
+                  summary: Default tagResource 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: listTagsForResource
+      summary: Amazon Resilience Hub List Tags for Resource
+      description: Lists the tags for your resources in your Resilience Hub applications.
+      tags:
+        - Tags
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The Amazon Resource Name (ARN) of the resource.
+      responses:
+        '200':
+          description: Tags listed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsResponse'
+              examples:
+                listTagsForResource200:
+                  summary: Default listTagsForResource 200 response
+                  x-microcks-default: true
+                  value:
+                    tags:
+                      Environment: Production
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /list-app-versions:
+    get:
+      operationId: listAppVersions
+      summary: Amazon Resilience Hub List App Versions
+      description: Lists the different versions for the Resilience Hub applications.
+      tags:
+        - Applications
+      parameters:
+        - name: appArn
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The Amazon Resource Name (ARN) of the application.
+        - name: maxResults
+          in: query
+          schema:
+            type: integer
+          example: 20
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: App versions listed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAppVersionsResponse'
+              examples:
+                listAppVersions200:
+                  summary: Default listAppVersions 200 response
+                  x-microcks-default: true
+                  value:
+                    appVersions: []
+                    nextToken: null
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /list-suggested-resiliency-policies:
+    get:
+      operationId: listSuggestedResiliencyPolicies
+      summary: Amazon Resilience Hub List Suggested Resiliency Policies
+      description: Lists the suggested resiliency policies for the Resilience Hub applications.
+      tags:
+        - Resiliency Policies
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: integer
+          example: 20
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Suggested resiliency policies listed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResiliencyPoliciesResponse'
+              examples:
+                listSuggestedResiliencyPolicies200:
+                  summary: Default listSuggestedResiliencyPolicies 200 response
+                  x-microcks-default: true
+                  value:
+                    resiliencyPolicies: []
+                    nextToken: null
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+components:
+  schemas:
+    ResiliencyTargets:
+      type: object
+      description: Defines RTO and RPO targets for a disruption type.
+      properties:
+        rtoInSecs:
+          type: integer
+          description: Recovery Time Objective in seconds.
+          example: 300
+        rpoInSecs:
+          type: integer
+          description: Recovery Point Objective in seconds.
+          example: 60
+    ResiliencyPolicy:
+      type: object
+      description: Defines a resiliency policy with RTO and RPO targets per disruption type.
+      properties:
+        policyArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the resiliency policy.
+          example: arn:aws:resiliencehub:us-east-1:123456789012:resiliency-policy/abc123
+        policyName:
+          type: string
+          description: The name of the policy.
+          example: mission-critical-policy
+        policyDescription:
+          type: string
+          description: The description for the policy.
+        dataLocationConstraint:
+          type: string
+          enum:
+            - AnyLocation
+            - SameContinent
+            - SameCountry
+        tier:
+          type: string
+          description: The tier for this resiliency policy.
+          enum:
+            - MissionCritical
+            - Critical
+            - Important
+            - CoreServices
+            - NonCritical
+            - NotApplicable
+          example: MissionCritical
+        policy:
+          type: object
+          description: The resiliency policy for disruption types.
+          additionalProperties:
+            $ref: '#/components/schemas/ResiliencyTargets'
+        creationTime:
+          type: string
+          format: date-time
+        estimatedCostTier:
+          type: string
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+    App:
+      type: object
+      description: Defines an AWS Resilience Hub application.
+      properties:
+        appArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the application.
+          example: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+        name:
+          type: string
+          description: The name for the application.
+          example: my-resilient-app
+        description:
+          type: string
+          description: The optional description for an app.
+        policyArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the resiliency policy.
+        creationTime:
+          type: string
+          format: date-time
+        complianceStatus:
+          type: string
+          enum:
+            - PolicyBreached
+            - PolicyMet
+            - NotAssessed
+            - ChangesDetected
+        lastAppComplianceEvaluationTime:
+          type: string
+          format: date-time
+        resiliencyScore:
+          type: number
+          format: float
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+        assessmentSchedule:
+          type: string
+          enum:
+            - Disabled
+            - Daily
+    Assessment:
+      type: object
+      description: Defines an assessment for an AWS Resilience Hub application.
+      properties:
+        appArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the application.
+        appVersion:
+          type: string
+          description: The version of the application.
+        assessmentArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the assessment.
+          example: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
+        assessmentName:
+          type: string
+          description: The name of the assessment.
+        assessmentStatus:
+          type: string
+          enum:
+            - Pending
+            - InProgress
+            - Failed
+            - Success
+          example: Success
+        complianceStatus:
+          type: string
+          enum:
+            - PolicyBreached
+            - PolicyMet
+          example: PolicyMet
+        invoker:
+          type: string
+          enum:
+            - User
+            - System
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        cost:
+          type: object
+        resiliencyScore:
+          type: number
+          format: float
+        compliance:
+          type: object
+        message:
+          type: string
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+    CreateAppRequest:
+      type: object
+      required:
+        - name
+      description: Request to create an AWS Resilience Hub application.
+      properties:
+        name:
+          type: string
+          description: The name for the application.
+          example: my-resilient-app
+        description:
+          type: string
+          description: The optional description for an app.
+        policyArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the resiliency policy.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+        assessmentSchedule:
+          type: string
+          enum:
+            - Disabled
+            - Daily
+        clientToken:
+          type: string
+    CreateAppResponse:
+      type: object
+      description: Response from creating an application.
+      properties:
+        app:
+          $ref: '#/components/schemas/App'
+    AppArnRequest:
+      type: object
+      required:
+        - appArn
+      description: Request containing an application ARN.
+      properties:
+        appArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the application.
+          example: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+    DescribeAppResponse:
+      type: object
+      properties:
+        app:
+          $ref: '#/components/schemas/App'
+    ListAppsResponse:
+      type: object
+      properties:
+        appSummaries:
+          type: array
+          description: The summaries for the Resilience Hub application.
+          items:
+            $ref: '#/components/schemas/App'
+        nextToken:
+          type: string
+    DeleteAppResponse:
+      type: object
+      properties:
+        appArn:
+          type: string
+    StartAppAssessmentRequest:
+      type: object
+      required:
+        - appArn
+        - appVersion
+        - assessmentName
+      properties:
+        appArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the application.
+        appVersion:
+          type: string
+          description: The version of the application.
+          example: release
+        assessmentName:
+          type: string
+          description: The name for the assessment.
+          example: my-assessment
+        clientToken:
+          type: string
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+    StartAppAssessmentResponse:
+      type: object
+      properties:
+        assessment:
+          $ref: '#/components/schemas/Assessment'
+    AssessmentArnRequest:
+      type: object
+      required:
+        - assessmentArn
+      properties:
+        assessmentArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the assessment.
+          example: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
+    DescribeAppAssessmentResponse:
+      type: object
+      properties:
+        assessment:
+          $ref: '#/components/schemas/Assessment'
+    ListAppAssessmentsResponse:
+      type: object
+      properties:
+        assessmentSummaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Assessment'
+        nextToken:
+          type: string
+    CreateResiliencyPolicyRequest:
+      type: object
+      required:
+        - policyName
+        - tier
+        - policy
+      properties:
+        policyName:
+          type: string
+          description: The name of the policy.
+          example: my-resilience-policy
+        policyDescription:
+          type: string
+        dataLocationConstraint:
+          type: string
+          enum:
+            - AnyLocation
+            - SameContinent
+            - SameCountry
+        tier:
+          type: string
+          enum:
+            - MissionCritical
+            - Critical
+            - Important
+            - CoreServices
+            - NonCritical
+            - NotApplicable
+        policy:
+          type: object
+          description: The resiliency policy per disruption type.
+          additionalProperties:
+            $ref: '#/components/schemas/ResiliencyTargets'
+        clientToken:
+          type: string
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+    CreateResiliencyPolicyResponse:
+      type: object
+      properties:
+        policy:
+          $ref: '#/components/schemas/ResiliencyPolicy'
+    PolicyArnRequest:
+      type: object
+      required:
+        - policyArn
+      properties:
+        policyArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the resiliency policy.
+          example: arn:aws:resiliencehub:us-east-1:123456789012:resiliency-policy/abc123
+    DescribeResiliencyPolicyResponse:
+      type: object
+      properties:
+        policy:
+          $ref: '#/components/schemas/ResiliencyPolicy'
+    ListResiliencyPoliciesResponse:
+      type: object
+      properties:
+        resiliencyPolicies:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResiliencyPolicy'
+        nextToken:
+          type: string
+    AssessmentArnPaginationRequest:
+      type: object
+      required:
+        - assessmentArn
+      properties:
+        assessmentArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the assessment.
+        maxResults:
+          type: integer
+          example: 20
+        nextToken:
+          type: string
+    ListRecommendationsResponse:
+      type: object
+      properties:
+        alarmRecommendations:
+          type: array
+          items:
+            type: object
+        sopRecommendations:
+          type: array
+          items:
+            type: object
+        testRecommendations:
+          type: array
+          items:
+            type: object
+        nextToken:
+          type: string
+    ResourceMapping:
+      type: object
+      description: Defines a resource mapping for an app version.
+      properties:
+        resourceName:
+          type: string
+        logicalStackName:
+          type: string
+        mappingType:
+          type: string
+          enum:
+            - CfnStack
+            - Resource
+            - AppRegistryApp
+            - ResourceGroup
+            - Terraform
+            - EKS
+        physicalResourceId:
+          type: object
+          properties:
+            identifier:
+              type: string
+            type:
+              type: string
+              enum:
+                - Arn
+                - Native
+        appRegistryAppName:
+          type: string
+        resourceGroupName:
+          type: string
+    AddResourceMappingsRequest:
+      type: object
+      required:
+        - appArn
+        - resourceMappings
+      properties:
+        appArn:
+          type: string
+        resourceMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceMapping'
+    AddResourceMappingsResponse:
+      type: object
+      properties:
+        appArn:
+          type: string
+        appVersion:
+          type: string
+        resourceMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceMapping'
+    PublishAppVersionResponse:
+      type: object
+      properties:
+        appArn:
+          type: string
+        appVersion:
+          type: string
+        identifier:
+          type: integer
+    ImportResourcesRequest:
+      type: object
+      required:
+        - appArn
+      properties:
+        appArn:
+          type: string
+        sourceArns:
+          type: array
+          items:
+            type: string
+        terraformSources:
+          type: array
+          items:
+            type: object
+            properties:
+              s3StateFileUrl:
+                type: string
+        importStrategy:
+          type: string
+          enum:
+            - AddOnly
+            - ReplaceAll
+        eksSources:
+          type: array
+          items:
+            type: object
+    ImportResourcesResponse:
+      type: object
+      properties:
+        appArn:
+          type: string
+        appVersion:
+          type: string
+        status:
+          type: string
+          enum:
+            - Pending
+            - InProgress
+            - Failed
+            - Success
+    AppVersionRequest:
+      type: object
+      required:
+        - appArn
+        - appVersion
+      properties:
+        appArn:
+          type: string
+        appVersion:
+          type: string
+          example: release
+    ResolveResourcesResponse:
+      type: object
+      properties:
+        appArn:
+          type: string
+        appVersion:
+          type: string
+        resolutionId:
+          type: string
+        status:
+          type: string
+          enum:
+            - Pending
+            - InProgress
+            - Failed
+            - Success
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      properties:
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+    ListTagsResponse:
+      type: object
+      properties:
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+    ListAppVersionsResponse:
+      type: object
+      properties:
+        appVersions:
+          type: array
+          items:
+            type: object
+            properties:
+              appVersion:
+                type: string
+              identifier:
+                type: integer
+              creationTime:
+                type: string
+                format: date-time
+        nextToken:
+          type: string
+    EmptyResponse:
+      type: object
+      properties: {}
+    ErrorResponse:
+      type: object
+      description: Standard error response from Amazon Resilience Hub.
+      properties:
+        message:
+          type: string
+          description: Error message.
+          example: An error occurred.
+        code:
+          type: string
+          description: Error code.
+  securitySchemes:
+    aws_signature:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4 authentication.
+
+tags:
+  - name: Applications
+    description: Create and manage Resilience Hub applications.
+  - name: Assessments
+    description: Run and retrieve resilience assessments.
+  - name: Resiliency Policies
+    description: Define RTO and RPO targets for applications.
+  - name: Recommendations
+    description: Retrieve alarm, SOP, and test recommendations.
+  - name: Resource Management
+    description: Map and import resources into app versions.
+  - name: Tags
+    description: Manage resource tags.
