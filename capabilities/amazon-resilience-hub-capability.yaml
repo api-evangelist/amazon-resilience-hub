@@ -1,0 +1,884 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Resilience Hub
+  description: AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications,
+    assessing against RTO and RPO targets and providing actionable recommendations.
+  tags:
+  - Amazon
+  - Resilience
+  - Hub
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-resilience-hub
+    baseUri: https://resiliencehub.amazonaws.com
+    description: Amazon Resilience Hub HTTP API.
+    authentication:
+      type: apikey
+      in: header
+      name: Authorization
+      value: '{{AMAZON_RESILIENCE_HUB_TOKEN}}'
+    resources:
+    - name: create-app
+      path: /create-app
+      operations:
+      - name: createapp
+        method: POST
+        description: Amazon Resilience Hub Create App
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: describe-app
+      path: /describe-app
+      operations:
+      - name: describeapp
+        method: POST
+        description: Amazon Resilience Hub Describe App
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: list-apps
+      path: /list-apps
+      operations:
+      - name: listapps
+        method: GET
+        description: Amazon Resilience Hub List Apps
+        inputParameters:
+        - name: appArn
+          in: query
+          type: string
+          description: The Amazon Resource Name (ARN) of the app.
+        - name: maxResults
+          in: query
+          type: integer
+          description: Maximum number of results to include in the response.
+        - name: nextToken
+          in: query
+          type: string
+          description: Null, or the token from a previous call to get the next set of results.
+        - name: name
+          in: query
+          type: string
+          description: The name for the one of the listed applications.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: delete-app
+      path: /delete-app
+      operations:
+      - name: deleteapp
+        method: DELETE
+        description: Amazon Resilience Hub Delete App
+        inputParameters:
+        - name: appArn
+          in: query
+          type: string
+          required: true
+          description: The Amazon Resource Name (ARN) of the application.
+        - name: forceDelete
+          in: query
+          type: boolean
+          description: A boolean option to override the failure when deleting an unprotected app.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: start-app-assessment
+      path: /start-app-assessment
+      operations:
+      - name: startappassessment
+        method: POST
+        description: Amazon Resilience Hub Start App Assessment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: describe-app-assessment
+      path: /describe-app-assessment
+      operations:
+      - name: describeappassessment
+        method: POST
+        description: Amazon Resilience Hub Describe App Assessment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: list-app-assessments
+      path: /list-app-assessments
+      operations:
+      - name: listappassessments
+        method: GET
+        description: Amazon Resilience Hub List App Assessments
+        inputParameters:
+        - name: appArn
+          in: query
+          type: string
+          description: Amazon Resource Name (ARN) of the application.
+        - name: assessmentName
+          in: query
+          type: string
+          description: The name for the assessment.
+        - name: assessmentStatus
+          in: query
+          type: array
+          description: The current status of the assessment for the resiliency policy.
+        - name: maxResults
+          in: query
+          type: integer
+        - name: nextToken
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: create-resiliency-policy
+      path: /create-resiliency-policy
+      operations:
+      - name: createresiliencypolicy
+        method: POST
+        description: Amazon Resilience Hub Create Resiliency Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: describe-resiliency-policy
+      path: /describe-resiliency-policy
+      operations:
+      - name: describeresiliencypolicy
+        method: POST
+        description: Amazon Resilience Hub Describe Resiliency Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: list-resiliency-policies
+      path: /list-resiliency-policies
+      operations:
+      - name: listresiliencypolicies
+        method: GET
+        description: Amazon Resilience Hub List Resiliency Policies
+        inputParameters:
+        - name: policyName
+          in: query
+          type: string
+          description: The name of the policy
+        - name: maxResults
+          in: query
+          type: integer
+        - name: nextToken
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: list-alarm-recommendations
+      path: /list-alarm-recommendations
+      operations:
+      - name: listalarmrecommendations
+        method: POST
+        description: Amazon Resilience Hub List Alarm Recommendations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: list-sop-recommendations
+      path: /list-sop-recommendations
+      operations:
+      - name: listsoprecommendations
+        method: POST
+        description: Amazon Resilience Hub List SOP Recommendations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: list-test-recommendations
+      path: /list-test-recommendations
+      operations:
+      - name: listtestrecommendations
+        method: POST
+        description: Amazon Resilience Hub List Test Recommendations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: add-draft-app-version-resource-mappings
+      path: /add-draft-app-version-resource-mappings
+      operations:
+      - name: adddraftappversionresourcemappings
+        method: POST
+        description: Amazon Resilience Hub Add Draft App Version Resource Mappings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: publish-app-version
+      path: /publish-app-version
+      operations:
+      - name: publishappversion
+        method: POST
+        description: Amazon Resilience Hub Publish App Version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: import-resources-to-draft-app-version
+      path: /import-resources-to-draft-app-version
+      operations:
+      - name: importresourcestodraftappversion
+        method: POST
+        description: Amazon Resilience Hub Import Resources to Draft App Version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resolve-app-version-resources
+      path: /resolve-app-version-resources
+      operations:
+      - name: resolveappversionresources
+        method: POST
+        description: Amazon Resilience Hub Resolve App Version Resources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tags-resourcearn
+      path: /tags/{resourceArn}
+      operations:
+      - name: tagresource
+        method: POST
+        description: Amazon Resilience Hub Tag Resource
+        inputParameters:
+        - name: resourceArn
+          in: path
+          type: string
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: listtagsforresource
+        method: GET
+        description: Amazon Resilience Hub List Tags for Resource
+        inputParameters:
+        - name: resourceArn
+          in: path
+          type: string
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: list-app-versions
+      path: /list-app-versions
+      operations:
+      - name: listappversions
+        method: GET
+        description: Amazon Resilience Hub List App Versions
+        inputParameters:
+        - name: appArn
+          in: query
+          type: string
+          required: true
+          description: The Amazon Resource Name (ARN) of the application.
+        - name: maxResults
+          in: query
+          type: integer
+        - name: nextToken
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: list-suggested-resiliency-policies
+      path: /list-suggested-resiliency-policies
+      operations:
+      - name: listsuggestedresiliencypolicies
+        method: GET
+        description: Amazon Resilience Hub List Suggested Resiliency Policies
+        inputParameters:
+        - name: maxResults
+          in: query
+          type: integer
+        - name: nextToken
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: amazon-resilience-hub-rest
+    description: REST adapter for Amazon Resilience Hub.
+    resources:
+    - path: /create-app
+      name: createapp
+      operations:
+      - method: POST
+        name: createapp
+        description: Amazon Resilience Hub Create App
+        call: amazon-resilience-hub.createapp
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /describe-app
+      name: describeapp
+      operations:
+      - method: POST
+        name: describeapp
+        description: Amazon Resilience Hub Describe App
+        call: amazon-resilience-hub.describeapp
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /list-apps
+      name: listapps
+      operations:
+      - method: GET
+        name: listapps
+        description: Amazon Resilience Hub List Apps
+        call: amazon-resilience-hub.listapps
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /delete-app
+      name: deleteapp
+      operations:
+      - method: DELETE
+        name: deleteapp
+        description: Amazon Resilience Hub Delete App
+        call: amazon-resilience-hub.deleteapp
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /start-app-assessment
+      name: startappassessment
+      operations:
+      - method: POST
+        name: startappassessment
+        description: Amazon Resilience Hub Start App Assessment
+        call: amazon-resilience-hub.startappassessment
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /describe-app-assessment
+      name: describeappassessment
+      operations:
+      - method: POST
+        name: describeappassessment
+        description: Amazon Resilience Hub Describe App Assessment
+        call: amazon-resilience-hub.describeappassessment
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /list-app-assessments
+      name: listappassessments
+      operations:
+      - method: GET
+        name: listappassessments
+        description: Amazon Resilience Hub List App Assessments
+        call: amazon-resilience-hub.listappassessments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /create-resiliency-policy
+      name: createresiliencypolicy
+      operations:
+      - method: POST
+        name: createresiliencypolicy
+        description: Amazon Resilience Hub Create Resiliency Policy
+        call: amazon-resilience-hub.createresiliencypolicy
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /describe-resiliency-policy
+      name: describeresiliencypolicy
+      operations:
+      - method: POST
+        name: describeresiliencypolicy
+        description: Amazon Resilience Hub Describe Resiliency Policy
+        call: amazon-resilience-hub.describeresiliencypolicy
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /list-resiliency-policies
+      name: listresiliencypolicies
+      operations:
+      - method: GET
+        name: listresiliencypolicies
+        description: Amazon Resilience Hub List Resiliency Policies
+        call: amazon-resilience-hub.listresiliencypolicies
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /list-alarm-recommendations
+      name: listalarmrecommendations
+      operations:
+      - method: POST
+        name: listalarmrecommendations
+        description: Amazon Resilience Hub List Alarm Recommendations
+        call: amazon-resilience-hub.listalarmrecommendations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /list-sop-recommendations
+      name: listsoprecommendations
+      operations:
+      - method: POST
+        name: listsoprecommendations
+        description: Amazon Resilience Hub List SOP Recommendations
+        call: amazon-resilience-hub.listsoprecommendations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /list-test-recommendations
+      name: listtestrecommendations
+      operations:
+      - method: POST
+        name: listtestrecommendations
+        description: Amazon Resilience Hub List Test Recommendations
+        call: amazon-resilience-hub.listtestrecommendations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /add-draft-app-version-resource-mappings
+      name: adddraftappversionresourcemappings
+      operations:
+      - method: POST
+        name: adddraftappversionresourcemappings
+        description: Amazon Resilience Hub Add Draft App Version Resource Mappings
+        call: amazon-resilience-hub.adddraftappversionresourcemappings
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /publish-app-version
+      name: publishappversion
+      operations:
+      - method: POST
+        name: publishappversion
+        description: Amazon Resilience Hub Publish App Version
+        call: amazon-resilience-hub.publishappversion
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /import-resources-to-draft-app-version
+      name: importresourcestodraftappversion
+      operations:
+      - method: POST
+        name: importresourcestodraftappversion
+        description: Amazon Resilience Hub Import Resources to Draft App Version
+        call: amazon-resilience-hub.importresourcestodraftappversion
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /resolve-app-version-resources
+      name: resolveappversionresources
+      operations:
+      - method: POST
+        name: resolveappversionresources
+        description: Amazon Resilience Hub Resolve App Version Resources
+        call: amazon-resilience-hub.resolveappversionresources
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /tags/{resourceArn}
+      name: tagresource
+      operations:
+      - method: POST
+        name: tagresource
+        description: Amazon Resilience Hub Tag Resource
+        call: amazon-resilience-hub.tagresource
+        with:
+          resourceArn: rest.resourceArn
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /tags/{resourceArn}
+      name: listtagsforresource
+      operations:
+      - method: GET
+        name: listtagsforresource
+        description: Amazon Resilience Hub List Tags for Resource
+        call: amazon-resilience-hub.listtagsforresource
+        with:
+          resourceArn: rest.resourceArn
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /list-app-versions
+      name: listappversions
+      operations:
+      - method: GET
+        name: listappversions
+        description: Amazon Resilience Hub List App Versions
+        call: amazon-resilience-hub.listappversions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /list-suggested-resiliency-policies
+      name: listsuggestedresiliencypolicies
+      operations:
+      - method: GET
+        name: listsuggestedresiliencypolicies
+        description: Amazon Resilience Hub List Suggested Resiliency Policies
+        call: amazon-resilience-hub.listsuggestedresiliencypolicies
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: amazon-resilience-hub-mcp
+    transport: http
+    description: MCP adapter for Amazon Resilience Hub for AI agent use.
+    tools:
+    - name: createapp
+      description: Amazon Resilience Hub Create App
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub.createapp
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: describeapp
+      description: Amazon Resilience Hub Describe App
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub.describeapp
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listapps
+      description: Amazon Resilience Hub List Apps
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-resilience-hub.listapps
+      with:
+        appArn: tools.appArn
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+        name: tools.name
+      inputParameters:
+      - name: appArn
+        type: string
+        description: The Amazon Resource Name (ARN) of the app.
+      - name: maxResults
+        type: integer
+        description: Maximum number of results to include in the response.
+      - name: nextToken
+        type: string
+        description: Null, or the token from a previous call to get the next set of results.
+      - name: name
+        type: string
+        description: The name for the one of the listed applications.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteapp
+      description: Amazon Resilience Hub Delete App
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: amazon-resilience-hub.deleteapp
+      with:
+        appArn: tools.appArn
+        forceDelete: tools.forceDelete
+      inputParameters:
+      - name: appArn
+        type: string
+        description: The Amazon Resource Name (ARN) of the application.
+        required: true
+      - name: forceDelete
+        type: boolean
+        description: A boolean option to override the failure when deleting an unprotected app.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: startappassessment
+      description: Amazon Resilience Hub Start App Assessment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub.startappassessment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: describeappassessment
+      description: Amazon Resilience Hub Describe App Assessment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub.describeappassessment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listappassessments
+      description: Amazon Resilience Hub List App Assessments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-resilience-hub.listappassessments
+      with:
+        appArn: tools.appArn
+        assessmentName: tools.assessmentName
+        assessmentStatus: tools.assessmentStatus
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+      inputParameters:
+      - name: appArn
+        type: string
+        description: Amazon Resource Name (ARN) of the application.
+      - name: assessmentName
+        type: string
+        description: The name for the assessment.
+      - name: assessmentStatus
+        type: array
+        description: The current status of the assessment for the resiliency policy.
+      - name: maxResults
+        type: integer
+        description: maxResults
+      - name: nextToken
+        type: string
+        description: nextToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createresiliencypolicy
+      description: Amazon Resilience Hub Create Resiliency Policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub.createresiliencypolicy
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: describeresiliencypolicy
+      description: Amazon Resilience Hub Describe Resiliency Policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub.describeresiliencypolicy
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listresiliencypolicies
+      description: Amazon Resilience Hub List Resiliency Policies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-resilience-hub.listresiliencypolicies
+      with:
+        policyName: tools.policyName
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+      inputParameters:
+      - name: policyName
+        type: string
+        description: The name of the policy
+      - name: maxResults
+        type: integer
+        description: maxResults
+      - name: nextToken
+        type: string
+        description: nextToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listalarmrecommendations
+      description: Amazon Resilience Hub List Alarm Recommendations
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub.listalarmrecommendations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listsoprecommendations
+      description: Amazon Resilience Hub List SOP Recommendations
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub.listsoprecommendations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listtestrecommendations
+      description: Amazon Resilience Hub List Test Recommendations
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub.listtestrecommendations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adddraftappversionresourcemappings
+      description: Amazon Resilience Hub Add Draft App Version Resource Mappings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub.adddraftappversionresourcemappings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: publishappversion
+      description: Amazon Resilience Hub Publish App Version
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub.publishappversion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: importresourcestodraftappversion
+      description: Amazon Resilience Hub Import Resources to Draft App Version
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub.importresourcestodraftappversion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: resolveappversionresources
+      description: Amazon Resilience Hub Resolve App Version Resources
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub.resolveappversionresources
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: tagresource
+      description: Amazon Resilience Hub Tag Resource
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub.tagresource
+      with:
+        resourceArn: tools.resourceArn
+      inputParameters:
+      - name: resourceArn
+        type: string
+        description: The Amazon Resource Name (ARN) of the resource.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listtagsforresource
+      description: Amazon Resilience Hub List Tags for Resource
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-resilience-hub.listtagsforresource
+      with:
+        resourceArn: tools.resourceArn
+      inputParameters:
+      - name: resourceArn
+        type: string
+        description: The Amazon Resource Name (ARN) of the resource.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listappversions
+      description: Amazon Resilience Hub List App Versions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-resilience-hub.listappversions
+      with:
+        appArn: tools.appArn
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+      inputParameters:
+      - name: appArn
+        type: string
+        description: The Amazon Resource Name (ARN) of the application.
+        required: true
+      - name: maxResults
+        type: integer
+        description: maxResults
+      - name: nextToken
+        type: string
+        description: nextToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listsuggestedresiliencypolicies
+      description: Amazon Resilience Hub List Suggested Resiliency Policies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-resilience-hub.listsuggestedresiliencypolicies
+      with:
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+      inputParameters:
+      - name: maxResults
+        type: integer
+        description: maxResults
+      - name: nextToken
+        type: string
+        description: nextToken
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    AMAZON_RESILIENCE_HUB_TOKEN: AMAZON_RESILIENCE_HUB_TOKEN
