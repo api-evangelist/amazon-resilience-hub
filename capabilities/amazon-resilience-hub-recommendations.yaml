@@ -1,0 +1,166 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Resilience Hub — Recommendations
+  description: 'Amazon Resilience Hub — Recommendations. 3 operations. Lead operation: Amazon Resilience Hub List Alarm Recommendations.
+    Self-contained Naftiko capability covering one Amazon Resilience Hub business surface.'
+  tags:
+  - Amazon Resilience Hub
+  - Recommendations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_RESILIENCE_HUB_API_KEY: AMAZON_RESILIENCE_HUB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-resilience-hub-recommendations
+    baseUri: https://resiliencehub.amazonaws.com
+    description: Amazon Resilience Hub — Recommendations business capability. Self-contained, no shared references.
+    resources:
+    - name: list-alarm-recommendations
+      path: /list-alarm-recommendations
+      operations:
+      - name: listalarmrecommendations
+        method: POST
+        description: Amazon Resilience Hub List Alarm Recommendations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: list-sop-recommendations
+      path: /list-sop-recommendations
+      operations:
+      - name: listsoprecommendations
+        method: POST
+        description: Amazon Resilience Hub List SOP Recommendations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: list-test-recommendations
+      path: /list-test-recommendations
+      operations:
+      - name: listtestrecommendations
+        method: POST
+        description: Amazon Resilience Hub List Test Recommendations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_RESILIENCE_HUB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amazon-resilience-hub-recommendations-rest
+    port: 8080
+    description: REST adapter for Amazon Resilience Hub — Recommendations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/list-alarm-recommendations
+      name: list-alarm-recommendations
+      description: REST surface for list-alarm-recommendations.
+      operations:
+      - method: POST
+        name: listalarmrecommendations
+        description: Amazon Resilience Hub List Alarm Recommendations
+        call: amazon-resilience-hub-recommendations.listalarmrecommendations
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/list-sop-recommendations
+      name: list-sop-recommendations
+      description: REST surface for list-sop-recommendations.
+      operations:
+      - method: POST
+        name: listsoprecommendations
+        description: Amazon Resilience Hub List SOP Recommendations
+        call: amazon-resilience-hub-recommendations.listsoprecommendations
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/list-test-recommendations
+      name: list-test-recommendations
+      description: REST surface for list-test-recommendations.
+      operations:
+      - method: POST
+        name: listtestrecommendations
+        description: Amazon Resilience Hub List Test Recommendations
+        call: amazon-resilience-hub-recommendations.listtestrecommendations
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-resilience-hub-recommendations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Resilience Hub — Recommendations. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: amazon-resilience-hub-list-alarm
+      description: Amazon Resilience Hub List Alarm Recommendations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub-recommendations.listalarmrecommendations
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-resilience-hub-list-sop
+      description: Amazon Resilience Hub List SOP Recommendations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub-recommendations.listsoprecommendations
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-resilience-hub-list-test
+      description: Amazon Resilience Hub List Test Recommendations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub-recommendations.listtestrecommendations
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

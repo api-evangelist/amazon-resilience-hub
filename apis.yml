@@ -1,10 +1,8 @@
 aid: amazon-resilience-hub
 name: Amazon Resilience Hub
-description: >-
-  AWS Resilience Hub provides a central place to define, validate, and track
-  the resilience of your AWS applications. It assesses your application against
-  your Recovery Time Objective (RTO) and Recovery Point Objective (RPO)
-  targets and provides actionable recommendations to improve resilience.
+description: AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications.
+  It assesses your application against your Recovery Time Objective (RTO) and Recovery Point Objective (RPO) targets and provides
+  actionable recommendations to improve resilience.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
@@ -13,18 +11,15 @@ tags:
 - High Availability
 - Operations
 - Resilience
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/amazon-resilience-hub/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/amazon-resilience-hub/refs/heads/main/apis.yml
 created: '2026-03-16'
-modified: '2026-04-19'
+modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
 - aid: amazon-resilience-hub:aws-resilience-hub-api
   name: AWS Resilience Hub API
-  description: >-
-    The AWS Resilience Hub API provides programmatic access to create and
-    manage applications, app assessments, resiliency policies, and
-    recommendations for improving application resilience against disruptions.
+  description: The AWS Resilience Hub API provides programmatic access to create and manage applications, app assessments,
+    resiliency policies, and recommendations for improving application resilience against disruptions.
   humanURL: https://aws.amazon.com/resilience-hub/
   baseURL: https://resiliencehub.amazonaws.com
   tags:
@@ -42,6 +37,18 @@ apis:
     url: https://aws.amazon.com/resilience-hub/pricing/
   - type: FAQ
     url: https://aws.amazon.com/resilience-hub/faqs/
+  - type: NaftikoCapability
+    url: capabilities/amazon-resilience-hub-applications.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-resilience-hub-assessments.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-resilience-hub-recommendations.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-resilience-hub-resiliency-policies.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-resilience-hub-resource-management.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-resilience-hub-tags.yaml
 common:
 - type: Portal
   url: https://aws.amazon.com/resilience-hub/
@@ -72,14 +79,14 @@ common:
 - type: Integrations
   url: https://aws.amazon.com/partners/
 integrations:
-  - name: Partner Programs
-  - name: Resources
-  - name: Success Stories
-  - name: Work with an AWS Partner
-  - name: AWS Marketplace
-  - name: AWS Partner Central
-  - name: Partner Paths
-  - name: co-sell with AWS
+- name: Partner Programs
+- name: Resources
+- name: Success Stories
+- name: Work with an AWS Partner
+- name: AWS Marketplace
+- name: AWS Partner Central
+- name: Partner Paths
+- name: co-sell with AWS
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

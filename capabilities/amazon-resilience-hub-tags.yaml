@@ -1,0 +1,124 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Resilience Hub — Tags
+  description: 'Amazon Resilience Hub — Tags. 2 operations. Lead operation: Amazon Resilience Hub Tag Resource. Self-contained
+    Naftiko capability covering one Amazon Resilience Hub business surface.'
+  tags:
+  - Amazon Resilience Hub
+  - Tags
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_RESILIENCE_HUB_API_KEY: AMAZON_RESILIENCE_HUB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-resilience-hub-tags
+    baseUri: https://resiliencehub.amazonaws.com
+    description: Amazon Resilience Hub — Tags business capability. Self-contained, no shared references.
+    resources:
+    - name: tags-resourceArn
+      path: /tags/{resourceArn}
+      operations:
+      - name: tagresource
+        method: POST
+        description: Amazon Resilience Hub Tag Resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: resourceArn
+          in: path
+          type: string
+          description: The Amazon Resource Name (ARN) of the resource.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: listtagsforresource
+        method: GET
+        description: Amazon Resilience Hub List Tags for Resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: resourceArn
+          in: path
+          type: string
+          description: The Amazon Resource Name (ARN) of the resource.
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_RESILIENCE_HUB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amazon-resilience-hub-tags-rest
+    port: 8080
+    description: REST adapter for Amazon Resilience Hub — Tags. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/tags/{resourcearn}
+      name: tags-resourcearn
+      description: REST surface for tags-resourceArn.
+      operations:
+      - method: POST
+        name: tagresource
+        description: Amazon Resilience Hub Tag Resource
+        call: amazon-resilience-hub-tags.tagresource
+        with:
+          resourceArn: rest.resourceArn
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: listtagsforresource
+        description: Amazon Resilience Hub List Tags for Resource
+        call: amazon-resilience-hub-tags.listtagsforresource
+        with:
+          resourceArn: rest.resourceArn
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-resilience-hub-tags-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Resilience Hub — Tags. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: amazon-resilience-hub-tag-resource
+      description: Amazon Resilience Hub Tag Resource
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub-tags.tagresource
+      with:
+        resourceArn: tools.resourceArn
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-resilience-hub-list-tags
+      description: Amazon Resilience Hub List Tags for Resource
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-resilience-hub-tags.listtagsforresource
+      with:
+        resourceArn: tools.resourceArn
+      outputParameters:
+      - type: object
+        mapping: $.

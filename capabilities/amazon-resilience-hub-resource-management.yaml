@@ -1,0 +1,166 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Resilience Hub — Resource Management
+  description: 'Amazon Resilience Hub — Resource Management. 3 operations. Lead operation: Amazon Resilience Hub Add Draft
+    App Version Resource Mappings. Self-contained Naftiko capability covering one Amazon Resilience Hub business surface.'
+  tags:
+  - Amazon Resilience Hub
+  - Resource Management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_RESILIENCE_HUB_API_KEY: AMAZON_RESILIENCE_HUB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-resilience-hub-resource-management
+    baseUri: https://resiliencehub.amazonaws.com
+    description: Amazon Resilience Hub — Resource Management business capability. Self-contained, no shared references.
+    resources:
+    - name: add-draft-app-version-resource-mappings
+      path: /add-draft-app-version-resource-mappings
+      operations:
+      - name: adddraftappversionresourcemappings
+        method: POST
+        description: Amazon Resilience Hub Add Draft App Version Resource Mappings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: import-resources-to-draft-app-version
+      path: /import-resources-to-draft-app-version
+      operations:
+      - name: importresourcestodraftappversion
+        method: POST
+        description: Amazon Resilience Hub Import Resources to Draft App Version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: resolve-app-version-resources
+      path: /resolve-app-version-resources
+      operations:
+      - name: resolveappversionresources
+        method: POST
+        description: Amazon Resilience Hub Resolve App Version Resources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_RESILIENCE_HUB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amazon-resilience-hub-resource-management-rest
+    port: 8080
+    description: REST adapter for Amazon Resilience Hub — Resource Management. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/add-draft-app-version-resource-mappings
+      name: add-draft-app-version-resource-mappings
+      description: REST surface for add-draft-app-version-resource-mappings.
+      operations:
+      - method: POST
+        name: adddraftappversionresourcemappings
+        description: Amazon Resilience Hub Add Draft App Version Resource Mappings
+        call: amazon-resilience-hub-resource-management.adddraftappversionresourcemappings
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/import-resources-to-draft-app-version
+      name: import-resources-to-draft-app-version
+      description: REST surface for import-resources-to-draft-app-version.
+      operations:
+      - method: POST
+        name: importresourcestodraftappversion
+        description: Amazon Resilience Hub Import Resources to Draft App Version
+        call: amazon-resilience-hub-resource-management.importresourcestodraftappversion
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resolve-app-version-resources
+      name: resolve-app-version-resources
+      description: REST surface for resolve-app-version-resources.
+      operations:
+      - method: POST
+        name: resolveappversionresources
+        description: Amazon Resilience Hub Resolve App Version Resources
+        call: amazon-resilience-hub-resource-management.resolveappversionresources
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-resilience-hub-resource-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Resilience Hub — Resource Management. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: amazon-resilience-hub-add-draft
+      description: Amazon Resilience Hub Add Draft App Version Resource Mappings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub-resource-management.adddraftappversionresourcemappings
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-resilience-hub-import-resources
+      description: Amazon Resilience Hub Import Resources to Draft App Version
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub-resource-management.importresourcestodraftappversion
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-resilience-hub-resolve-app
+      description: Amazon Resilience Hub Resolve App Version Resources
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-resilience-hub-resource-management.resolveappversionresources
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
