@@ -1,37 +1,50 @@
-# Amazon Resilience Hub
+# Amazon Resilience Hub (amazon-resilience-hub)
+
 AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications. It assesses your application against your Recovery Time Objective (RTO) and Recovery Point Objective (RPO) targets and provides actionable recommendations to improve resilience.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/amazon-resilience-hub/refs/heads/main/apis.yml)
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/amazon-resilience-hub/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/amazon-resilience-hub/refs/heads/main/apis.yml)
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## Scope
 
-## Tags:
+- **Type:** Index
 
- - AWS, Disaster Recovery, High Availability, Operations, Resilience
+## Tags
+
+- AWS
+- Disaster Recovery
+- High Availability
+- Operations
+- Resilience
 
 ## Timestamps
 
 - **Created:** 2026-03-16
-- **Modified:** 2026-04-19
+- **Modified:** 2026-05-19
 
 ## APIs
 
 ### AWS Resilience Hub API
+
 The AWS Resilience Hub API provides programmatic access to create and manage applications, app assessments, resiliency policies, and recommendations for improving application resilience against disruptions.
 
-**Human URL:** [https://aws.amazon.com/resilience-hub/](https://aws.amazon.com/resilience-hub/)
+- **Human URL:** [https://aws.amazon.com/resilience-hub/](https://aws.amazon.com/resilience-hub/)
+- **Base URL:** `https://resiliencehub.amazonaws.com`
 
-#### Tags:
+#### Tags
 
- - Disaster Recovery, High Availability, Resilience
+- Disaster Recovery
+- High Availability
+- Resilience
 
 #### Properties
 
 - [Documentation](https://docs.aws.amazon.com/resilience-hub/latest/APIReference/Welcome.html)
-- [OpenAPI](https://api.apis.guru/v2/specs/amazonaws.com/resiliencehub/2020-04-30/openapi.yaml)
+- [OpenAPI](https://api.apis.guru/v2/specs/amazonaws.com/resiliencehub/2020-04-30/openapi.yaml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
 - [Getting Started](https://aws.amazon.com/resilience-hub/getting-started/)
 - [Pricing](https://aws.amazon.com/resilience-hub/pricing/)
-- [FAQ](https://aws.amazon.com/resilience-hub/faqs/)
+- [F A Q](https://aws.amazon.com/resilience-hub/faqs/)
+- [Postman Collection](collections/amazon-resilience-hub.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/amazon-resilience-hub.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ## Common Properties
 
@@ -46,20 +59,11 @@ The AWS Resilience Hub API provides programmatic access to create and manage app
 - [Console](https://console.aws.amazon.com/resiliencehub/)
 - [Sign Up](https://portal.aws.amazon.com/billing/signup)
 - [Login](https://signin.aws.amazon.com/)
-- [Status](https://health.aws.amazon.com/health/status)
+- [Status Page](https://health.aws.amazon.com/health/status)
 - [Contact](https://aws.amazon.com/contact-us/)
-
-## Artifacts
-
-Machine-readable API specifications organized by format.
-
-### OpenAPI
-
-- [amazon-resilience-hub-openapi.yml](openapi/amazon-resilience-hub-openapi.yml)
+- [Integrations](https://aws.amazon.com/partners/)
 
 ## Maintainers
 
 **FN:** Kin Lane
-
 **Email:** kin@apievangelist.com
-
