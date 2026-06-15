@@ -1,0 +1,605 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Resilience Hub",
+    "version": "2020-04-30"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Create App",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/create-app",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates an AWS Resilience Hub application. A Resilience Hub application is a collection of AWS resources structured to prevent and recover AWS application disruptions."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Describe App",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/describe-app",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Describes an AWS Resilience Hub application."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub List Apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://resiliencehub.amazonaws.com/list-apps",
+            "params": [
+              {
+                "name": "appArn",
+                "value": "",
+                "type": "query",
+                "description": "The Amazon Resource Name (ARN) of the app."
+              },
+              {
+                "name": "maxResults",
+                "value": "20",
+                "type": "query",
+                "description": "Maximum number of results to include in the response."
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "Null, or the token from a previous call to get the next set of results."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name for the one of the listed applications."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists your Resilience Hub applications."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Delete App",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://resiliencehub.amazonaws.com/delete-app",
+            "params": [
+              {
+                "name": "appArn",
+                "value": "",
+                "type": "query",
+                "description": "The Amazon Resource Name (ARN) of the application."
+              },
+              {
+                "name": "forceDelete",
+                "value": "",
+                "type": "query",
+                "description": "A boolean option to override the failure when deleting an unprotected app."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Deletes an AWS Resilience Hub application. This is a destructive action that cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Publish App Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/publish-app-version",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Publishes a new version of a specific Resilience Hub application."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub List App Versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://resiliencehub.amazonaws.com/list-app-versions",
+            "params": [
+              {
+                "name": "appArn",
+                "value": "",
+                "type": "query",
+                "description": "The Amazon Resource Name (ARN) of the application."
+              },
+              {
+                "name": "maxResults",
+                "value": "20",
+                "type": "query"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists the different versions for the Resilience Hub applications."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Assessments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Start App Assessment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/start-app-assessment",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a new application assessment for an application."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Describe App Assessment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/describe-app-assessment",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Describes an assessment for an AWS Resilience Hub application."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub List App Assessments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://resiliencehub.amazonaws.com/list-app-assessments",
+            "params": [
+              {
+                "name": "appArn",
+                "value": "",
+                "type": "query",
+                "description": "Amazon Resource Name (ARN) of the application."
+              },
+              {
+                "name": "assessmentName",
+                "value": "",
+                "type": "query",
+                "description": "The name for the assessment."
+              },
+              {
+                "name": "assessmentStatus",
+                "value": "",
+                "type": "query",
+                "description": "The current status of the assessment for the resiliency policy."
+              },
+              {
+                "name": "maxResults",
+                "value": "20",
+                "type": "query"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists the assessments for an AWS Resilience Hub application."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Resiliency Policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Create Resiliency Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/create-resiliency-policy",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a resiliency policy for an application."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Describe Resiliency Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/describe-resiliency-policy",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Describes a specified resiliency policy for an AWS Resilience Hub application."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub List Resiliency Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://resiliencehub.amazonaws.com/list-resiliency-policies",
+            "params": [
+              {
+                "name": "policyName",
+                "value": "",
+                "type": "query",
+                "description": "The name of the policy"
+              },
+              {
+                "name": "maxResults",
+                "value": "20",
+                "type": "query"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists the resiliency policies for the Resilience Hub applications."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub List Suggested Resiliency Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://resiliencehub.amazonaws.com/list-suggested-resiliency-policies",
+            "params": [
+              {
+                "name": "maxResults",
+                "value": "20",
+                "type": "query"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists the suggested resiliency policies for the Resilience Hub applications."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Recommendations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Resilience Hub List Alarm Recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/list-alarm-recommendations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists the alarm recommendations for an AWS Resilience Hub application."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub List SOP Recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/list-sop-recommendations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists the standard operating procedure (SOP) recommendations for the Resilience Hub applications."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub List Test Recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/list-test-recommendations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists the test recommendations for the Resilience Hub application."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Resource Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Add Draft App Version Resource Mappings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/add-draft-app-version-resource-mappings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Adds the source of resource-maps to the draft version of an application."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Import Resources to Draft App Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/import-resources-to-draft-app-version",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Imports resources to Resilience Hub application draft version from CloudFormation stacks, resource-groups, or application registry apps."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Resolve App Version Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/resolve-app-version-resources",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Resolves the resources for an application version."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Resilience Hub List Tags for Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://resiliencehub.amazonaws.com/tags/:resourceArn",
+            "params": [
+              {
+                "name": "resourceArn",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the resource."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists the tags for your resources in your Resilience Hub applications."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Tag Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/tags/:resourceArn",
+            "params": [
+              {
+                "name": "resourceArn",
+                "value": "arn:aws:resiliencehub:us-east-1:123456789012:app/my-app",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Applies one or more tags to a resource."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
