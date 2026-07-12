@@ -40,6 +40,14 @@ apis:
       - type: FAQ
         url: https://aws.amazon.com/resilience-hub/faqs/
 common:
+  - type: TrustCenter
+    url: security/amazon-resilience-hub-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/amazon-resilience-hub-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/amazon-resilience-hub-domain-security.yml
+  - type: Authentication
+    url: authentication/amazon-resilience-hub-authentication.yml
   - type: Portal
     url: https://aws.amazon.com/resilience-hub/
   - type: Website
