@@ -40,6 +40,8 @@ apis:
       - type: FAQ
         url: https://aws.amazon.com/resilience-hub/faqs/
 common:
+  - type: AgenticAccess
+    url: agentic-access/amazon-resilience-hub-agentic-access.yml
   - type: TrustCenter
     url: security/amazon-resilience-hub-trust-center.yml
   - type: VulnerabilityDisclosure
