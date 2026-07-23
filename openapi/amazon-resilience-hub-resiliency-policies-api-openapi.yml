@@ -1,0 +1,352 @@
+openapi: 3.0.3
+info:
+  title: Amazon Resilience Hub Applications Resiliency Policies API
+  description: AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications, assessing against RTO and RPO targets and providing actionable recommendations.
+  version: '2020-04-30'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/contact-us/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-generated-from: documentation
+servers:
+- url: https://resiliencehub.amazonaws.com
+  description: Amazon Resilience Hub API endpoint
+tags:
+- name: Resiliency Policies
+  description: Define RTO and RPO targets for applications.
+paths:
+  /create-resiliency-policy:
+    post:
+      operationId: createResiliencyPolicy
+      summary: Amazon Resilience Hub Create Resiliency Policy
+      description: Creates a resiliency policy for an application.
+      tags:
+      - Resiliency Policies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateResiliencyPolicyRequest'
+            examples:
+              createResiliencyPolicyRequest:
+                summary: Default createResiliencyPolicy request
+                x-microcks-default: true
+                value:
+                  policyName: my-resilience-policy
+                  tier: MissionCritical
+                  policy:
+                    AZ:
+                      rtoInSecs: 300
+                      rpoInSecs: 60
+                    Hardware:
+                      rtoInSecs: 900
+                      rpoInSecs: 300
+      responses:
+        '200':
+          description: Resiliency policy created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateResiliencyPolicyResponse'
+              examples:
+                createResiliencyPolicy200:
+                  summary: Default createResiliencyPolicy 200 response
+                  x-microcks-default: true
+                  value:
+                    policy:
+                      policyArn: arn:aws:resiliencehub:us-east-1:123456789012:resiliency-policy/abc123
+                      policyName: my-resilience-policy
+                      tier: MissionCritical
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /describe-resiliency-policy:
+    post:
+      operationId: describeResiliencyPolicy
+      summary: Amazon Resilience Hub Describe Resiliency Policy
+      description: Describes a specified resiliency policy for an AWS Resilience Hub application.
+      tags:
+      - Resiliency Policies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PolicyArnRequest'
+            examples:
+              describeResiliencyPolicyRequest:
+                summary: Default describeResiliencyPolicy request
+                x-microcks-default: true
+                value:
+                  policyArn: arn:aws:resiliencehub:us-east-1:123456789012:resiliency-policy/abc123
+      responses:
+        '200':
+          description: Resiliency policy described.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeResiliencyPolicyResponse'
+              examples:
+                describeResiliencyPolicy200:
+                  summary: Default describeResiliencyPolicy 200 response
+                  x-microcks-default: true
+                  value:
+                    policy:
+                      policyArn: arn:aws:resiliencehub:us-east-1:123456789012:resiliency-policy/abc123
+                      policyName: my-resilience-policy
+                      tier: MissionCritical
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /list-resiliency-policies:
+    get:
+      operationId: listResiliencyPolicies
+      summary: Amazon Resilience Hub List Resiliency Policies
+      description: Lists the resiliency policies for the Resilience Hub applications.
+      tags:
+      - Resiliency Policies
+      parameters:
+      - name: policyName
+        in: query
+        schema:
+          type: string
+        description: The name of the policy
+      - name: maxResults
+        in: query
+        schema:
+          type: integer
+        example: 20
+      - name: nextToken
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Resiliency policies listed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResiliencyPoliciesResponse'
+              examples:
+                listResiliencyPolicies200:
+                  summary: Default listResiliencyPolicies 200 response
+                  x-microcks-default: true
+                  value:
+                    resiliencyPolicies: []
+                    nextToken: null
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /list-suggested-resiliency-policies:
+    get:
+      operationId: listSuggestedResiliencyPolicies
+      summary: Amazon Resilience Hub List Suggested Resiliency Policies
+      description: Lists the suggested resiliency policies for the Resilience Hub applications.
+      tags:
+      - Resiliency Policies
+      parameters:
+      - name: maxResults
+        in: query
+        schema:
+          type: integer
+        example: 20
+      - name: nextToken
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Suggested resiliency policies listed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResiliencyPoliciesResponse'
+              examples:
+                listSuggestedResiliencyPolicies200:
+                  summary: Default listSuggestedResiliencyPolicies 200 response
+                  x-microcks-default: true
+                  value:
+                    resiliencyPolicies: []
+                    nextToken: null
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CreateResiliencyPolicyRequest:
+      type: object
+      required:
+      - policyName
+      - tier
+      - policy
+      properties:
+        policyName:
+          type: string
+          description: The name of the policy.
+          example: my-resilience-policy
+        policyDescription:
+          type: string
+        dataLocationConstraint:
+          type: string
+          enum:
+          - AnyLocation
+          - SameContinent
+          - SameCountry
+        tier:
+          type: string
+          enum:
+          - MissionCritical
+          - Critical
+          - Important
+          - CoreServices
+          - NonCritical
+          - NotApplicable
+        policy:
+          type: object
+          description: The resiliency policy per disruption type.
+          additionalProperties:
+            $ref: '#/components/schemas/ResiliencyTargets'
+        clientToken:
+          type: string
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+    CreateResiliencyPolicyResponse:
+      type: object
+      properties:
+        policy:
+          $ref: '#/components/schemas/ResiliencyPolicy'
+    ListResiliencyPoliciesResponse:
+      type: object
+      properties:
+        resiliencyPolicies:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResiliencyPolicy'
+        nextToken:
+          type: string
+    ResiliencyPolicy:
+      type: object
+      description: Defines a resiliency policy with RTO and RPO targets per disruption type.
+      properties:
+        policyArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the resiliency policy.
+          example: arn:aws:resiliencehub:us-east-1:123456789012:resiliency-policy/abc123
+        policyName:
+          type: string
+          description: The name of the policy.
+          example: mission-critical-policy
+        policyDescription:
+          type: string
+          description: The description for the policy.
+        dataLocationConstraint:
+          type: string
+          enum:
+          - AnyLocation
+          - SameContinent
+          - SameCountry
+        tier:
+          type: string
+          description: The tier for this resiliency policy.
+          enum:
+          - MissionCritical
+          - Critical
+          - Important
+          - CoreServices
+          - NonCritical
+          - NotApplicable
+          example: MissionCritical
+        policy:
+          type: object
+          description: The resiliency policy for disruption types.
+          additionalProperties:
+            $ref: '#/components/schemas/ResiliencyTargets'
+        creationTime:
+          type: string
+          format: date-time
+        estimatedCostTier:
+          type: string
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+    ErrorResponse:
+      type: object
+      description: Standard error response from Amazon Resilience Hub.
+      properties:
+        message:
+          type: string
+          description: Error message.
+          example: An error occurred.
+        code:
+          type: string
+          description: Error code.
+    DescribeResiliencyPolicyResponse:
+      type: object
+      properties:
+        policy:
+          $ref: '#/components/schemas/ResiliencyPolicy'
+    PolicyArnRequest:
+      type: object
+      required:
+      - policyArn
+      properties:
+        policyArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the resiliency policy.
+          example: arn:aws:resiliencehub:us-east-1:123456789012:resiliency-policy/abc123
+    ResiliencyTargets:
+      type: object
+      description: Defines RTO and RPO targets for a disruption type.
+      properties:
+        rtoInSecs:
+          type: integer
+          description: Recovery Time Objective in seconds.
+          example: 300
+        rpoInSecs:
+          type: integer
+          description: Recovery Point Objective in seconds.
+          example: 60
+  securitySchemes:
+    aws_signature:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4 authentication.

@@ -1,0 +1,201 @@
+openapi: 3.0.3
+info:
+  title: Amazon Resilience Hub Applications Recommendations API
+  description: AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications, assessing against RTO and RPO targets and providing actionable recommendations.
+  version: '2020-04-30'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/contact-us/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-generated-from: documentation
+servers:
+- url: https://resiliencehub.amazonaws.com
+  description: Amazon Resilience Hub API endpoint
+tags:
+- name: Recommendations
+  description: Retrieve alarm, SOP, and test recommendations.
+paths:
+  /list-alarm-recommendations:
+    post:
+      operationId: listAlarmRecommendations
+      summary: Amazon Resilience Hub List Alarm Recommendations
+      description: Lists the alarm recommendations for an AWS Resilience Hub application.
+      tags:
+      - Recommendations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentArnPaginationRequest'
+            examples:
+              listAlarmRecommendationsRequest:
+                summary: Default listAlarmRecommendations request
+                x-microcks-default: true
+                value:
+                  assessmentArn: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
+                  maxResults: 20
+      responses:
+        '200':
+          description: Alarm recommendations listed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRecommendationsResponse'
+              examples:
+                listAlarmRecommendations200:
+                  summary: Default listAlarmRecommendations 200 response
+                  x-microcks-default: true
+                  value:
+                    alarmRecommendations: []
+                    nextToken: null
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /list-sop-recommendations:
+    post:
+      operationId: listSopRecommendations
+      summary: Amazon Resilience Hub List SOP Recommendations
+      description: Lists the standard operating procedure (SOP) recommendations for the Resilience Hub applications.
+      tags:
+      - Recommendations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentArnPaginationRequest'
+            examples:
+              listSopRecommendationsRequest:
+                summary: Default listSopRecommendations request
+                x-microcks-default: true
+                value:
+                  assessmentArn: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
+      responses:
+        '200':
+          description: SOP recommendations listed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRecommendationsResponse'
+              examples:
+                listSopRecommendations200:
+                  summary: Default listSopRecommendations 200 response
+                  x-microcks-default: true
+                  value:
+                    sopRecommendations: []
+                    nextToken: null
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /list-test-recommendations:
+    post:
+      operationId: listTestRecommendations
+      summary: Amazon Resilience Hub List Test Recommendations
+      description: Lists the test recommendations for the Resilience Hub application.
+      tags:
+      - Recommendations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentArnPaginationRequest'
+            examples:
+              listTestRecommendationsRequest:
+                summary: Default listTestRecommendations request
+                x-microcks-default: true
+                value:
+                  assessmentArn: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
+      responses:
+        '200':
+          description: Test recommendations listed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRecommendationsResponse'
+              examples:
+                listTestRecommendations200:
+                  summary: Default listTestRecommendations 200 response
+                  x-microcks-default: true
+                  value:
+                    testRecommendations: []
+                    nextToken: null
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ListRecommendationsResponse:
+      type: object
+      properties:
+        alarmRecommendations:
+          type: array
+          items:
+            type: object
+        sopRecommendations:
+          type: array
+          items:
+            type: object
+        testRecommendations:
+          type: array
+          items:
+            type: object
+        nextToken:
+          type: string
+    ErrorResponse:
+      type: object
+      description: Standard error response from Amazon Resilience Hub.
+      properties:
+        message:
+          type: string
+          description: Error message.
+          example: An error occurred.
+        code:
+          type: string
+          description: Error code.
+    AssessmentArnPaginationRequest:
+      type: object
+      required:
+      - assessmentArn
+      properties:
+        assessmentArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the assessment.
+        maxResults:
+          type: integer
+          example: 20
+        nextToken:
+          type: string
+  securitySchemes:
+    aws_signature:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4 authentication.

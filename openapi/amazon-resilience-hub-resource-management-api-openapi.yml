@@ -1,0 +1,299 @@
+openapi: 3.0.3
+info:
+  title: Amazon Resilience Hub Applications Resource Management API
+  description: AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications, assessing against RTO and RPO targets and providing actionable recommendations.
+  version: '2020-04-30'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/contact-us/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-generated-from: documentation
+servers:
+- url: https://resiliencehub.amazonaws.com
+  description: Amazon Resilience Hub API endpoint
+tags:
+- name: Resource Management
+  description: Map and import resources into app versions.
+paths:
+  /add-draft-app-version-resource-mappings:
+    post:
+      operationId: addDraftAppVersionResourceMappings
+      summary: Amazon Resilience Hub Add Draft App Version Resource Mappings
+      description: Adds the source of resource-maps to the draft version of an application.
+      tags:
+      - Resource Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddResourceMappingsRequest'
+            examples:
+              addDraftResourceMappingsRequest:
+                summary: Default addDraftAppVersionResourceMappings request
+                x-microcks-default: true
+                value:
+                  appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+                  resourceMappings: []
+      responses:
+        '200':
+          description: Resource mappings added.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddResourceMappingsResponse'
+              examples:
+                addDraftResourceMappings200:
+                  summary: Default addDraftAppVersionResourceMappings 200 response
+                  x-microcks-default: true
+                  value:
+                    appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+                    appVersion: draft
+                    resourceMappings: []
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /import-resources-to-draft-app-version:
+    post:
+      operationId: importResourcesToDraftAppVersion
+      summary: Amazon Resilience Hub Import Resources to Draft App Version
+      description: Imports resources to Resilience Hub application draft version from CloudFormation stacks, resource-groups, or application registry apps.
+      tags:
+      - Resource Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportResourcesRequest'
+            examples:
+              importResourcesRequest:
+                summary: Default importResourcesToDraftAppVersion request
+                x-microcks-default: true
+                value:
+                  appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+                  terraformSources: []
+      responses:
+        '200':
+          description: Resources imported to draft version.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportResourcesResponse'
+              examples:
+                importResources200:
+                  summary: Default importResourcesToDraftAppVersion 200 response
+                  x-microcks-default: true
+                  value:
+                    appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+                    appVersion: draft
+                    status: Pending
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /resolve-app-version-resources:
+    post:
+      operationId: resolveAppVersionResources
+      summary: Amazon Resilience Hub Resolve App Version Resources
+      description: Resolves the resources for an application version.
+      tags:
+      - Resource Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppVersionRequest'
+            examples:
+              resolveAppVersionResourcesRequest:
+                summary: Default resolveAppVersionResources request
+                x-microcks-default: true
+                value:
+                  appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+                  appVersion: release
+      responses:
+        '200':
+          description: Resources resolved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResolveResourcesResponse'
+              examples:
+                resolveAppVersionResources200:
+                  summary: Default resolveAppVersionResources 200 response
+                  x-microcks-default: true
+                  value:
+                    appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+                    appVersion: release
+                    resolutionId: abc123
+                    status: Pending
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ResolveResourcesResponse:
+      type: object
+      properties:
+        appArn:
+          type: string
+        appVersion:
+          type: string
+        resolutionId:
+          type: string
+        status:
+          type: string
+          enum:
+          - Pending
+          - InProgress
+          - Failed
+          - Success
+    ImportResourcesRequest:
+      type: object
+      required:
+      - appArn
+      properties:
+        appArn:
+          type: string
+        sourceArns:
+          type: array
+          items:
+            type: string
+        terraformSources:
+          type: array
+          items:
+            type: object
+            properties:
+              s3StateFileUrl:
+                type: string
+        importStrategy:
+          type: string
+          enum:
+          - AddOnly
+          - ReplaceAll
+        eksSources:
+          type: array
+          items:
+            type: object
+    ResourceMapping:
+      type: object
+      description: Defines a resource mapping for an app version.
+      properties:
+        resourceName:
+          type: string
+        logicalStackName:
+          type: string
+        mappingType:
+          type: string
+          enum:
+          - CfnStack
+          - Resource
+          - AppRegistryApp
+          - ResourceGroup
+          - Terraform
+          - EKS
+        physicalResourceId:
+          type: object
+          properties:
+            identifier:
+              type: string
+            type:
+              type: string
+              enum:
+              - Arn
+              - Native
+        appRegistryAppName:
+          type: string
+        resourceGroupName:
+          type: string
+    ErrorResponse:
+      type: object
+      description: Standard error response from Amazon Resilience Hub.
+      properties:
+        message:
+          type: string
+          description: Error message.
+          example: An error occurred.
+        code:
+          type: string
+          description: Error code.
+    AddResourceMappingsResponse:
+      type: object
+      properties:
+        appArn:
+          type: string
+        appVersion:
+          type: string
+        resourceMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceMapping'
+    AddResourceMappingsRequest:
+      type: object
+      required:
+      - appArn
+      - resourceMappings
+      properties:
+        appArn:
+          type: string
+        resourceMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceMapping'
+    AppVersionRequest:
+      type: object
+      required:
+      - appArn
+      - appVersion
+      properties:
+        appArn:
+          type: string
+        appVersion:
+          type: string
+          example: release
+    ImportResourcesResponse:
+      type: object
+      properties:
+        appArn:
+          type: string
+        appVersion:
+          type: string
+        status:
+          type: string
+          enum:
+          - Pending
+          - InProgress
+          - Failed
+          - Success
+  securitySchemes:
+    aws_signature:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4 authentication.

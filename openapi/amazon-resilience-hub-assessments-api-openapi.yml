@@ -1,0 +1,303 @@
+openapi: 3.0.3
+info:
+  title: Amazon Resilience Hub Applications Assessments API
+  description: AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications, assessing against RTO and RPO targets and providing actionable recommendations.
+  version: '2020-04-30'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/contact-us/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-generated-from: documentation
+servers:
+- url: https://resiliencehub.amazonaws.com
+  description: Amazon Resilience Hub API endpoint
+tags:
+- name: Assessments
+  description: Run and retrieve resilience assessments.
+paths:
+  /start-app-assessment:
+    post:
+      operationId: startAppAssessment
+      summary: Amazon Resilience Hub Start App Assessment
+      description: Creates a new application assessment for an application.
+      tags:
+      - Assessments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartAppAssessmentRequest'
+            examples:
+              startAppAssessmentRequest:
+                summary: Default startAppAssessment request
+                x-microcks-default: true
+                value:
+                  appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+                  appVersion: release
+                  assessmentName: my-assessment
+      responses:
+        '200':
+          description: Assessment started successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartAppAssessmentResponse'
+              examples:
+                startAppAssessment200:
+                  summary: Default startAppAssessment 200 response
+                  x-microcks-default: true
+                  value:
+                    assessment:
+                      appArn: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+                      assessmentArn: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
+                      assessmentStatus: Pending
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /describe-app-assessment:
+    post:
+      operationId: describeAppAssessment
+      summary: Amazon Resilience Hub Describe App Assessment
+      description: Describes an assessment for an AWS Resilience Hub application.
+      tags:
+      - Assessments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentArnRequest'
+            examples:
+              describeAppAssessmentRequest:
+                summary: Default describeAppAssessment request
+                x-microcks-default: true
+                value:
+                  assessmentArn: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
+      responses:
+        '200':
+          description: Assessment description retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAppAssessmentResponse'
+              examples:
+                describeAppAssessment200:
+                  summary: Default describeAppAssessment 200 response
+                  x-microcks-default: true
+                  value:
+                    assessment:
+                      assessmentArn: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
+                      assessmentStatus: Success
+                      complianceStatus: PolicyMet
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /list-app-assessments:
+    get:
+      operationId: listAppAssessments
+      summary: Amazon Resilience Hub List App Assessments
+      description: Lists the assessments for an AWS Resilience Hub application.
+      tags:
+      - Assessments
+      parameters:
+      - name: appArn
+        in: query
+        schema:
+          type: string
+        description: Amazon Resource Name (ARN) of the application.
+      - name: assessmentName
+        in: query
+        schema:
+          type: string
+        description: The name for the assessment.
+      - name: assessmentStatus
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - Pending
+            - InProgress
+            - Failed
+            - Success
+        description: The current status of the assessment for the resiliency policy.
+      - name: maxResults
+        in: query
+        schema:
+          type: integer
+        example: 20
+      - name: nextToken
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Assessments listed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAppAssessmentsResponse'
+              examples:
+                listAppAssessments200:
+                  summary: Default listAppAssessments 200 response
+                  x-microcks-default: true
+                  value:
+                    assessmentSummaries: []
+                    nextToken: null
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Assessment:
+      type: object
+      description: Defines an assessment for an AWS Resilience Hub application.
+      properties:
+        appArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the application.
+        appVersion:
+          type: string
+          description: The version of the application.
+        assessmentArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the assessment.
+          example: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
+        assessmentName:
+          type: string
+          description: The name of the assessment.
+        assessmentStatus:
+          type: string
+          enum:
+          - Pending
+          - InProgress
+          - Failed
+          - Success
+          example: Success
+        complianceStatus:
+          type: string
+          enum:
+          - PolicyBreached
+          - PolicyMet
+          example: PolicyMet
+        invoker:
+          type: string
+          enum:
+          - User
+          - System
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        cost:
+          type: object
+        resiliencyScore:
+          type: number
+          format: float
+        compliance:
+          type: object
+        message:
+          type: string
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+    ListAppAssessmentsResponse:
+      type: object
+      properties:
+        assessmentSummaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Assessment'
+        nextToken:
+          type: string
+    StartAppAssessmentRequest:
+      type: object
+      required:
+      - appArn
+      - appVersion
+      - assessmentName
+      properties:
+        appArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the application.
+        appVersion:
+          type: string
+          description: The version of the application.
+          example: release
+        assessmentName:
+          type: string
+          description: The name for the assessment.
+          example: my-assessment
+        clientToken:
+          type: string
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+    ErrorResponse:
+      type: object
+      description: Standard error response from Amazon Resilience Hub.
+      properties:
+        message:
+          type: string
+          description: Error message.
+          example: An error occurred.
+        code:
+          type: string
+          description: Error code.
+    AssessmentArnRequest:
+      type: object
+      required:
+      - assessmentArn
+      properties:
+        assessmentArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the assessment.
+          example: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
+    StartAppAssessmentResponse:
+      type: object
+      properties:
+        assessment:
+          $ref: '#/components/schemas/Assessment'
+    DescribeAppAssessmentResponse:
+      type: object
+      properties:
+        assessment:
+          $ref: '#/components/schemas/Assessment'
+  securitySchemes:
+    aws_signature:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4 authentication.

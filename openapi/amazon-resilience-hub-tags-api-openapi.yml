@@ -1,0 +1,147 @@
+openapi: 3.0.3
+info:
+  title: Amazon Resilience Hub Applications Tags API
+  description: AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications, assessing against RTO and RPO targets and providing actionable recommendations.
+  version: '2020-04-30'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/contact-us/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-generated-from: documentation
+servers:
+- url: https://resiliencehub.amazonaws.com
+  description: Amazon Resilience Hub API endpoint
+tags:
+- name: Tags
+  description: Manage resource tags.
+paths:
+  /tags/{resourceArn}:
+    post:
+      operationId: tagResource
+      summary: Amazon Resilience Hub Tag Resource
+      description: Applies one or more tags to a resource.
+      tags:
+      - Tags
+      parameters:
+      - name: resourceArn
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The Amazon Resource Name (ARN) of the resource.
+        example: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceRequest'
+            examples:
+              tagResourceRequest:
+                summary: Default tagResource request
+                x-microcks-default: true
+                value:
+                  tags:
+                    Environment: Production
+                    Team: Platform
+      responses:
+        '200':
+          description: Tags applied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyResponse'
+              examples:
+                tagResource200:
+                  summary: Default tagResource 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: listTagsForResource
+      summary: Amazon Resilience Hub List Tags for Resource
+      description: Lists the tags for your resources in your Resilience Hub applications.
+      tags:
+      - Tags
+      parameters:
+      - name: resourceArn
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The Amazon Resource Name (ARN) of the resource.
+      responses:
+        '200':
+          description: Tags listed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsResponse'
+              examples:
+                listTagsForResource200:
+                  summary: Default listTagsForResource 200 response
+                  x-microcks-default: true
+                  value:
+                    tags:
+                      Environment: Production
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - aws_signature: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    EmptyResponse:
+      type: object
+      properties: {}
+    ListTagsResponse:
+      type: object
+      properties:
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+    ErrorResponse:
+      type: object
+      description: Standard error response from Amazon Resilience Hub.
+      properties:
+        message:
+          type: string
+          description: Error message.
+          example: An error occurred.
+        code:
+          type: string
+          description: Error code.
+    TagResourceRequest:
+      type: object
+      required:
+      - tags
+      properties:
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+  securitySchemes:
+    aws_signature:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4 authentication.
