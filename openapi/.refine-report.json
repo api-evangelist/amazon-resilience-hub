@@ -1,0 +1,24 @@
+{
+  "provider": "amazon-resilience-hub",
+  "sources": [
+    "amazon-resilience-hub-applications-api-openapi.yml",
+    "amazon-resilience-hub-assessments-api-openapi.yml",
+    "amazon-resilience-hub-recommendations-api-openapi.yml",
+    "amazon-resilience-hub-resiliency-policies-api-openapi.yml",
+    "amazon-resilience-hub-resource-management-api-openapi.yml",
+    "amazon-resilience-hub-tags-api-openapi.yml"
+  ],
+  "outputs": [
+    "amazon-resilience-hub-applications-api-openapi.yml",
+    "amazon-resilience-hub-assessments-api-openapi.yml",
+    "amazon-resilience-hub-recommendations-api-openapi.yml",
+    "amazon-resilience-hub-resiliency-policies-api-openapi.yml",
+    "amazon-resilience-hub-resource-management-api-openapi.yml",
+    "amazon-resilience-hub-tags-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
