@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Resilience Hub Applications Resiliency Policies API",
+    "version": "2020-04-30"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Resiliency Policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Create Resiliency Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/create-resiliency-policy",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a resiliency policy for an application."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Describe Resiliency Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/describe-resiliency-policy",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Describes a specified resiliency policy for an AWS Resilience Hub application."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub List Resiliency Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://resiliencehub.amazonaws.com/list-resiliency-policies",
+            "params": [
+              {
+                "name": "policyName",
+                "value": "",
+                "type": "query",
+                "description": "The name of the policy"
+              },
+              {
+                "name": "maxResults",
+                "value": "20",
+                "type": "query"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists the resiliency policies for the Resilience Hub applications."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub List Suggested Resiliency Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://resiliencehub.amazonaws.com/list-suggested-resiliency-policies",
+            "params": [
+              {
+                "name": "maxResults",
+                "value": "20",
+                "type": "query"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists the suggested resiliency policies for the Resilience Hub applications."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

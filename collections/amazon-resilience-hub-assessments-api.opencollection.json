@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Resilience Hub Applications Assessments API",
+    "version": "2020-04-30"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Assessments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Start App Assessment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/start-app-assessment",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a new application assessment for an application."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Describe App Assessment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/describe-app-assessment",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Describes an assessment for an AWS Resilience Hub application."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub List App Assessments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://resiliencehub.amazonaws.com/list-app-assessments",
+            "params": [
+              {
+                "name": "appArn",
+                "value": "",
+                "type": "query",
+                "description": "Amazon Resource Name (ARN) of the application."
+              },
+              {
+                "name": "assessmentName",
+                "value": "",
+                "type": "query",
+                "description": "The name for the assessment."
+              },
+              {
+                "name": "assessmentStatus",
+                "value": "",
+                "type": "query",
+                "description": "The current status of the assessment for the resiliency policy."
+              },
+              {
+                "name": "maxResults",
+                "value": "20",
+                "type": "query"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists the assessments for an AWS Resilience Hub application."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

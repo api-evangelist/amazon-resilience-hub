@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Resilience Hub Applications Recommendations API",
+    "version": "2020-04-30"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Recommendations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Resilience Hub List Alarm Recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/list-alarm-recommendations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists the alarm recommendations for an AWS Resilience Hub application."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub List SOP Recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/list-sop-recommendations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists the standard operating procedure (SOP) recommendations for the Resilience Hub applications."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub List Test Recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/list-test-recommendations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists the test recommendations for the Resilience Hub application."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

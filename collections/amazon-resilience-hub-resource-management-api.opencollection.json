@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Resilience Hub Applications Resource Management API",
+    "version": "2020-04-30"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Resource Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Add Draft App Version Resource Mappings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/add-draft-app-version-resource-mappings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Adds the source of resource-maps to the draft version of an application."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Import Resources to Draft App Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/import-resources-to-draft-app-version",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Imports resources to Resilience Hub application draft version from CloudFormation stacks, resource-groups, or application registry apps."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Resolve App Version Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/resolve-app-version-resources",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Resolves the resources for an application version."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

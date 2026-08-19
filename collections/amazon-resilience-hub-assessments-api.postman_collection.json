@@ -1,0 +1,586 @@
+{
+  "item": [
+    {
+      "id": "a287d23b-1a52-46f3-94fc-3eca107450ef",
+      "name": "Assessments",
+      "description": {
+        "content": "Run and retrieve resilience assessments.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c96c95f9-e4d5-4382-b501-8708767f408a",
+          "name": "Amazon Resilience Hub Start App Assessment",
+          "request": {
+            "name": "Amazon Resilience Hub Start App Assessment",
+            "description": {
+              "content": "Creates a new application assessment for an application.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "start-app-assessment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appArn\": \"<string>\",\n  \"appVersion\": \"<string>\",\n  \"assessmentName\": \"<string>\",\n  \"clientToken\": \"<string>\",\n  \"tags\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "59fec569-340a-4c4b-8155-297bc9978661",
+              "name": "Assessment started successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "start-app-assessment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appArn\": \"arn:aws:resiliencehub:us-east-1:123456789012:app/my-app\",\n  \"appVersion\": \"release\",\n  \"assessmentName\": \"my-assessment\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assessment\": {\n    \"appArn\": \"arn:aws:resiliencehub:us-east-1:123456789012:app/my-app\",\n    \"assessmentArn\": \"arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123\",\n    \"assessmentStatus\": \"Pending\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f5fd56d-8b6b-49ba-8ede-ade3c65da759",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "start-app-assessment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appArn\": \"arn:aws:resiliencehub:us-east-1:123456789012:app/my-app\",\n  \"appVersion\": \"release\",\n  \"assessmentName\": \"my-assessment\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"An error occurred.\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6fc61fa9-e23a-42f7-bf7e-cd88a398796a",
+          "name": "Amazon Resilience Hub Describe App Assessment",
+          "request": {
+            "name": "Amazon Resilience Hub Describe App Assessment",
+            "description": {
+              "content": "Describes an assessment for an AWS Resilience Hub application.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "describe-app-assessment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assessmentArn\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "09adb00d-ae82-4d1e-aca4-5724ac56e680",
+              "name": "Assessment description retrieved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "describe-app-assessment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assessmentArn\": \"arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assessment\": {\n    \"assessmentArn\": \"arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123\",\n    \"assessmentStatus\": \"Success\",\n    \"complianceStatus\": \"PolicyMet\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3382f2c2-7b18-4761-a286-6d5e81ac897f",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "describe-app-assessment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assessmentArn\": \"arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"An error occurred.\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c38f4328-6663-46fe-b0ab-4a5221469d6c",
+          "name": "Amazon Resilience Hub List App Assessments",
+          "request": {
+            "name": "Amazon Resilience Hub List App Assessments",
+            "description": {
+              "content": "Lists the assessments for an AWS Resilience Hub application.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "list-app-assessments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "appArn",
+                  "value": "<string>",
+                  "description": "Amazon Resource Name (ARN) of the application."
+                },
+                {
+                  "disabled": false,
+                  "key": "assessmentName",
+                  "value": "<string>",
+                  "description": "The name for the assessment."
+                },
+                {
+                  "disabled": false,
+                  "key": "assessmentStatus",
+                  "value": "<string>",
+                  "description": "The current status of the assessment for the resiliency policy."
+                },
+                {
+                  "disabled": false,
+                  "key": "assessmentStatus",
+                  "value": "<string>",
+                  "description": "The current status of the assessment for the resiliency policy."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxResults",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "nextToken",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "34a465d5-3191-4852-8625-07e51766e111",
+              "name": "Assessments listed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list-app-assessments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "appArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assessmentName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assessmentStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assessmentStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "20"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assessmentSummaries\": [],\n  \"nextToken\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "841b8ff5-55e9-4374-a126-e2a671cdd700",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list-app-assessments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "appArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assessmentName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assessmentStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assessmentStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "20"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"An error occurred.\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://resiliencehub.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a8143b3f-042c-4b7d-967f-ecc8a4a254d5",
+    "name": "Amazon Resilience Hub Applications Assessments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications, assessing against RTO and RPO targets and providing actionable recommendations.\n\nContact Support:\n Name: AWS Support",
+      "type": "text/plain"
+    }
+  }
+}

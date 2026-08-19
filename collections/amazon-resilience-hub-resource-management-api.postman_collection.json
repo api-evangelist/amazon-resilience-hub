@@ -1,0 +1,530 @@
+{
+  "item": [
+    {
+      "id": "a9cee67c-050c-4ea0-91f3-aaa1aff74538",
+      "name": "Resource Management",
+      "description": {
+        "content": "Map and import resources into app versions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1844e9a9-3082-4b4f-8757-2731ceaed8d0",
+          "name": "Amazon Resilience Hub Add Draft App Version Resource Mappings",
+          "request": {
+            "name": "Amazon Resilience Hub Add Draft App Version Resource Mappings",
+            "description": {
+              "content": "Adds the source of resource-maps to the draft version of an application.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "add-draft-app-version-resource-mappings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appArn\": \"<string>\",\n  \"resourceMappings\": [\n    {\n      \"resourceName\": \"<string>\",\n      \"logicalStackName\": \"<string>\",\n      \"mappingType\": \"<string>\",\n      \"physicalResourceId\": {\n        \"identifier\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"appRegistryAppName\": \"<string>\",\n      \"resourceGroupName\": \"<string>\"\n    },\n    {\n      \"resourceName\": \"<string>\",\n      \"logicalStackName\": \"<string>\",\n      \"mappingType\": \"<string>\",\n      \"physicalResourceId\": {\n        \"identifier\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"appRegistryAppName\": \"<string>\",\n      \"resourceGroupName\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8befc679-cf32-41a3-b580-0cccbcc0657b",
+              "name": "Resource mappings added.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "add-draft-app-version-resource-mappings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appArn\": \"arn:aws:resiliencehub:us-east-1:123456789012:app/my-app\",\n  \"resourceMappings\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"appArn\": \"arn:aws:resiliencehub:us-east-1:123456789012:app/my-app\",\n  \"appVersion\": \"draft\",\n  \"resourceMappings\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fac7ed92-1849-4cf6-bf39-5024d426fb58",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "add-draft-app-version-resource-mappings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appArn\": \"arn:aws:resiliencehub:us-east-1:123456789012:app/my-app\",\n  \"resourceMappings\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"An error occurred.\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dae7a22a-013f-47d3-b239-4655554495af",
+          "name": "Amazon Resilience Hub Import Resources to Draft App Version",
+          "request": {
+            "name": "Amazon Resilience Hub Import Resources to Draft App Version",
+            "description": {
+              "content": "Imports resources to Resilience Hub application draft version from CloudFormation stacks, resource-groups, or application registry apps.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "import-resources-to-draft-app-version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appArn\": \"<string>\",\n  \"sourceArns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"terraformSources\": [\n    {\n      \"s3StateFileUrl\": \"<string>\"\n    },\n    {\n      \"s3StateFileUrl\": \"<string>\"\n    }\n  ],\n  \"importStrategy\": \"<string>\",\n  \"eksSources\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5f1a7ba7-9919-4a9e-9db3-07f095a05591",
+              "name": "Resources imported to draft version.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "import-resources-to-draft-app-version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appArn\": \"arn:aws:resiliencehub:us-east-1:123456789012:app/my-app\",\n  \"terraformSources\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"appArn\": \"arn:aws:resiliencehub:us-east-1:123456789012:app/my-app\",\n  \"appVersion\": \"draft\",\n  \"status\": \"Pending\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad681535-8c20-4146-bdb1-7c3b805ec53b",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "import-resources-to-draft-app-version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appArn\": \"arn:aws:resiliencehub:us-east-1:123456789012:app/my-app\",\n  \"terraformSources\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"An error occurred.\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f10897a4-77b4-49f0-a8b2-571265f31613",
+          "name": "Amazon Resilience Hub Resolve App Version Resources",
+          "request": {
+            "name": "Amazon Resilience Hub Resolve App Version Resources",
+            "description": {
+              "content": "Resolves the resources for an application version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "resolve-app-version-resources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appArn\": \"<string>\",\n  \"appVersion\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "28d3d72c-b0d6-4156-b59d-dccecb735fdc",
+              "name": "Resources resolved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resolve-app-version-resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appArn\": \"arn:aws:resiliencehub:us-east-1:123456789012:app/my-app\",\n  \"appVersion\": \"release\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"appArn\": \"arn:aws:resiliencehub:us-east-1:123456789012:app/my-app\",\n  \"appVersion\": \"release\",\n  \"resolutionId\": \"abc123\",\n  \"status\": \"Pending\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33c63673-1146-485b-931e-df689c7c18d2",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resolve-app-version-resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appArn\": \"arn:aws:resiliencehub:us-east-1:123456789012:app/my-app\",\n  \"appVersion\": \"release\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"An error occurred.\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://resiliencehub.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "700b86a0-9171-4619-ac1d-f03dff20d5c8",
+    "name": "Amazon Resilience Hub Applications Resource Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications, assessing against RTO and RPO targets and providing actionable recommendations.\n\nContact Support:\n Name: AWS Support",
+      "type": "text/plain"
+    }
+  }
+}

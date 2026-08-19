@@ -1,0 +1,190 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Resilience Hub Applications API",
+    "version": "2020-04-30"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Create App",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/create-app",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates an AWS Resilience Hub application. A Resilience Hub application is a collection of AWS resources structured to prevent and recover AWS application disruptions."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Describe App",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/describe-app",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Describes an AWS Resilience Hub application."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub List Apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://resiliencehub.amazonaws.com/list-apps",
+            "params": [
+              {
+                "name": "appArn",
+                "value": "",
+                "type": "query",
+                "description": "The Amazon Resource Name (ARN) of the app."
+              },
+              {
+                "name": "maxResults",
+                "value": "20",
+                "type": "query",
+                "description": "Maximum number of results to include in the response."
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "Null, or the token from a previous call to get the next set of results."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name for the one of the listed applications."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists your Resilience Hub applications."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Delete App",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://resiliencehub.amazonaws.com/delete-app",
+            "params": [
+              {
+                "name": "appArn",
+                "value": "",
+                "type": "query",
+                "description": "The Amazon Resource Name (ARN) of the application."
+              },
+              {
+                "name": "forceDelete",
+                "value": "",
+                "type": "query",
+                "description": "A boolean option to override the failure when deleting an unprotected app."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Deletes an AWS Resilience Hub application. This is a destructive action that cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Publish App Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/publish-app-version",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Publishes a new version of a specific Resilience Hub application."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub List App Versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://resiliencehub.amazonaws.com/list-app-versions",
+            "params": [
+              {
+                "name": "appArn",
+                "value": "",
+                "type": "query",
+                "description": "The Amazon Resource Name (ARN) of the application."
+              },
+              {
+                "name": "maxResults",
+                "value": "20",
+                "type": "query"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists the different versions for the Resilience Hub applications."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Resilience Hub Applications Tags API",
+    "version": "2020-04-30"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Resilience Hub List Tags for Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://resiliencehub.amazonaws.com/tags/:resourceArn",
+            "params": [
+              {
+                "name": "resourceArn",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the resource."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists the tags for your resources in your Resilience Hub applications."
+        },
+        {
+          "info": {
+            "name": "Amazon Resilience Hub Tag Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://resiliencehub.amazonaws.com/tags/:resourceArn",
+            "params": [
+              {
+                "name": "resourceArn",
+                "value": "arn:aws:resiliencehub:us-east-1:123456789012:app/my-app",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Applies one or more tags to a resource."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
