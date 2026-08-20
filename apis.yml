@@ -23,6 +23,11 @@ tags:
   - AWS
   - Disaster Recovery
   - High Availability
+  - Resilience
+tags_raw:
+  - AWS
+  - Disaster Recovery
+  - High Availability
   - Operations
   - Resilience
 url: https://raw.githubusercontent.com/api-evangelist/amazon-resilience-hub/refs/heads/main/apis.yml
@@ -36,6 +41,8 @@ apis:
   humanURL: https://aws.amazon.com/resilience-hub/
   baseURL: https://resiliencehub.amazonaws.com
   tags:
+  - Application
+  tags_raw:
   - Applications
   properties:
   - type: OpenAPI
