@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Amazon Resilience Hub Applications Assessments API
   description: AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications, assessing against RTO and RPO targets and providing actionable recommendations.
@@ -241,6 +241,36 @@ components:
             $ref: '#/components/schemas/Assessment'
         nextToken:
           type: string
+    DescribeAppAssessmentResponse:
+      type: object
+      properties:
+        assessment:
+          $ref: '#/components/schemas/Assessment'
+    AssessmentArnRequest:
+      type: object
+      required:
+      - assessmentArn
+      properties:
+        assessmentArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the assessment.
+          example: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
+    StartAppAssessmentResponse:
+      type: object
+      properties:
+        assessment:
+          $ref: '#/components/schemas/Assessment'
+    ErrorResponse:
+      type: object
+      description: Standard error response from Amazon Resilience Hub.
+      properties:
+        message:
+          type: string
+          description: Error message.
+          example: An error occurred.
+        code:
+          type: string
+          description: Error code.
     StartAppAssessmentRequest:
       type: object
       required:
@@ -265,36 +295,6 @@ components:
           type: object
           additionalProperties:
             type: string
-    ErrorResponse:
-      type: object
-      description: Standard error response from Amazon Resilience Hub.
-      properties:
-        message:
-          type: string
-          description: Error message.
-          example: An error occurred.
-        code:
-          type: string
-          description: Error code.
-    AssessmentArnRequest:
-      type: object
-      required:
-      - assessmentArn
-      properties:
-        assessmentArn:
-          type: string
-          description: The Amazon Resource Name (ARN) of the assessment.
-          example: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
-    StartAppAssessmentResponse:
-      type: object
-      properties:
-        assessment:
-          $ref: '#/components/schemas/Assessment'
-    DescribeAppAssessmentResponse:
-      type: object
-      properties:
-        assessment:
-          $ref: '#/components/schemas/Assessment'
   securitySchemes:
     aws_signature:
       type: apiKey

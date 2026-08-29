@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Amazon Resilience Hub Applications API
   description: AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications, assessing against RTO and RPO targets and providing actionable recommendations.
@@ -303,15 +303,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    PublishAppVersionResponse:
-      type: object
-      properties:
-        appArn:
-          type: string
-        appVersion:
-          type: string
-        identifier:
-          type: integer
     ListAppsResponse:
       type: object
       properties:
@@ -322,6 +313,36 @@ components:
             $ref: '#/components/schemas/App'
         nextToken:
           type: string
+    DescribeAppResponse:
+      type: object
+      properties:
+        app:
+          $ref: '#/components/schemas/App'
+    CreateAppResponse:
+      type: object
+      description: Response from creating an application.
+      properties:
+        app:
+          $ref: '#/components/schemas/App'
+    PublishAppVersionResponse:
+      type: object
+      properties:
+        appArn:
+          type: string
+        appVersion:
+          type: string
+        identifier:
+          type: integer
+    AppArnRequest:
+      type: object
+      required:
+      - appArn
+      description: Request containing an application ARN.
+      properties:
+        appArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the application.
+          example: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
     ListAppVersionsResponse:
       type: object
       properties:
@@ -339,11 +360,6 @@ components:
                 format: date-time
         nextToken:
           type: string
-    DescribeAppResponse:
-      type: object
-      properties:
-        app:
-          $ref: '#/components/schemas/App'
     ErrorResponse:
       type: object
       description: Standard error response from Amazon Resilience Hub.
@@ -355,21 +371,38 @@ components:
         code:
           type: string
           description: Error code.
+    CreateAppRequest:
+      type: object
+      required:
+      - name
+      description: Request to create an AWS Resilience Hub application.
+      properties:
+        name:
+          type: string
+          description: The name for the application.
+          example: my-resilient-app
+        description:
+          type: string
+          description: The optional description for an app.
+        policyArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the resiliency policy.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+        assessmentSchedule:
+          type: string
+          enum:
+          - Disabled
+          - Daily
+        clientToken:
+          type: string
     DeleteAppResponse:
       type: object
       properties:
         appArn:
           type: string
-    AppArnRequest:
-      type: object
-      required:
-      - appArn
-      description: Request containing an application ARN.
-      properties:
-        appArn:
-          type: string
-          description: The Amazon Resource Name (ARN) of the application.
-          example: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
     App:
       type: object
       description: Defines an AWS Resilience Hub application.
@@ -413,39 +446,6 @@ components:
           enum:
           - Disabled
           - Daily
-    CreateAppResponse:
-      type: object
-      description: Response from creating an application.
-      properties:
-        app:
-          $ref: '#/components/schemas/App'
-    CreateAppRequest:
-      type: object
-      required:
-      - name
-      description: Request to create an AWS Resilience Hub application.
-      properties:
-        name:
-          type: string
-          description: The name for the application.
-          example: my-resilient-app
-        description:
-          type: string
-          description: The optional description for an app.
-        policyArn:
-          type: string
-          description: The Amazon Resource Name (ARN) of the resiliency policy.
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-        assessmentSchedule:
-          type: string
-          enum:
-          - Disabled
-          - Daily
-        clientToken:
-          type: string
   securitySchemes:
     aws_signature:
       type: apiKey

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Amazon Resilience Hub Applications Recommendations API
   description: AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications, assessing against RTO and RPO targets and providing actionable recommendations.
@@ -169,17 +169,6 @@ components:
             type: object
         nextToken:
           type: string
-    ErrorResponse:
-      type: object
-      description: Standard error response from Amazon Resilience Hub.
-      properties:
-        message:
-          type: string
-          description: Error message.
-          example: An error occurred.
-        code:
-          type: string
-          description: Error code.
     AssessmentArnPaginationRequest:
       type: object
       required:
@@ -193,6 +182,17 @@ components:
           example: 20
         nextToken:
           type: string
+    ErrorResponse:
+      type: object
+      description: Standard error response from Amazon Resilience Hub.
+      properties:
+        message:
+          type: string
+          description: Error message.
+          example: An error occurred.
+        code:
+          type: string
+          description: Error code.
   securitySchemes:
     aws_signature:
       type: apiKey

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Amazon Resilience Hub Applications Resource Management API
   description: AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications, assessing against RTO and RPO targets and providing actionable recommendations.
@@ -158,22 +158,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ResolveResourcesResponse:
+    AddResourceMappingsRequest:
       type: object
+      required:
+      - appArn
+      - resourceMappings
       properties:
         appArn:
           type: string
-        appVersion:
-          type: string
-        resolutionId:
-          type: string
-        status:
-          type: string
-          enum:
-          - Pending
-          - InProgress
-          - Failed
-          - Success
+        resourceMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceMapping'
     ImportResourcesRequest:
       type: object
       required:
@@ -201,6 +197,28 @@ components:
           type: array
           items:
             type: object
+    AppVersionRequest:
+      type: object
+      required:
+      - appArn
+      - appVersion
+      properties:
+        appArn:
+          type: string
+        appVersion:
+          type: string
+          example: release
+    AddResourceMappingsResponse:
+      type: object
+      properties:
+        appArn:
+          type: string
+        appVersion:
+          type: string
+        resourceMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceMapping'
     ResourceMapping:
       type: object
       description: Defines a resource mapping for an app version.
@@ -232,6 +250,22 @@ components:
           type: string
         resourceGroupName:
           type: string
+    ResolveResourcesResponse:
+      type: object
+      properties:
+        appArn:
+          type: string
+        appVersion:
+          type: string
+        resolutionId:
+          type: string
+        status:
+          type: string
+          enum:
+          - Pending
+          - InProgress
+          - Failed
+          - Success
     ErrorResponse:
       type: object
       description: Standard error response from Amazon Resilience Hub.
@@ -243,40 +277,6 @@ components:
         code:
           type: string
           description: Error code.
-    AddResourceMappingsResponse:
-      type: object
-      properties:
-        appArn:
-          type: string
-        appVersion:
-          type: string
-        resourceMappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceMapping'
-    AddResourceMappingsRequest:
-      type: object
-      required:
-      - appArn
-      - resourceMappings
-      properties:
-        appArn:
-          type: string
-        resourceMappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceMapping'
-    AppVersionRequest:
-      type: object
-      required:
-      - appArn
-      - appVersion
-      properties:
-        appArn:
-          type: string
-        appVersion:
-          type: string
-          example: release
     ImportResourcesResponse:
       type: object
       properties:
