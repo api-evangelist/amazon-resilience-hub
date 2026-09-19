@@ -74,6 +74,8 @@ apis:
   humanURL: https://aws.amazon.com/resilience-hub/
   baseURL: https://resiliencehub.amazonaws.com
   tags:
+  - Assessment
+  tags_raw:
   - Assessments
   properties:
   - type: OpenAPI
