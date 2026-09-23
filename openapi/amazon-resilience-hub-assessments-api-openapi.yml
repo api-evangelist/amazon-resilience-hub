@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Resilience Hub Applications Assessments API
+  title: Amazon Resilience Hub Assessments API
   description: AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications, assessing against RTO and RPO targets and providing actionable recommendations.
   version: '2020-04-30'
   contact:
@@ -177,6 +177,46 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response from Amazon Resilience Hub.
+      properties:
+        message:
+          type: string
+          description: Error message.
+          example: An error occurred.
+        code:
+          type: string
+          description: Error code.
+    StartAppAssessmentRequest:
+      type: object
+      required:
+      - appArn
+      - appVersion
+      - assessmentName
+      properties:
+        appArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the application.
+        appVersion:
+          type: string
+          description: The version of the application.
+          example: release
+        assessmentName:
+          type: string
+          description: The name for the assessment.
+          example: my-assessment
+        clientToken:
+          type: string
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+    StartAppAssessmentResponse:
+      type: object
+      properties:
+        assessment:
+          $ref: '#/components/schemas/Assessment'
     Assessment:
       type: object
       description: Defines an assessment for an AWS Resilience Hub application.
@@ -232,15 +272,6 @@ components:
           type: object
           additionalProperties:
             type: string
-    ListAppAssessmentsResponse:
-      type: object
-      properties:
-        assessmentSummaries:
-          type: array
-          items:
-            $ref: '#/components/schemas/Assessment'
-        nextToken:
-          type: string
     DescribeAppAssessmentResponse:
       type: object
       properties:
@@ -255,46 +286,15 @@ components:
           type: string
           description: The Amazon Resource Name (ARN) of the assessment.
           example: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
-    StartAppAssessmentResponse:
+    ListAppAssessmentsResponse:
       type: object
       properties:
-        assessment:
-          $ref: '#/components/schemas/Assessment'
-    ErrorResponse:
-      type: object
-      description: Standard error response from Amazon Resilience Hub.
-      properties:
-        message:
+        assessmentSummaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Assessment'
+        nextToken:
           type: string
-          description: Error message.
-          example: An error occurred.
-        code:
-          type: string
-          description: Error code.
-    StartAppAssessmentRequest:
-      type: object
-      required:
-      - appArn
-      - appVersion
-      - assessmentName
-      properties:
-        appArn:
-          type: string
-          description: The Amazon Resource Name (ARN) of the application.
-        appVersion:
-          type: string
-          description: The version of the application.
-          example: release
-        assessmentName:
-          type: string
-          description: The name for the assessment.
-          example: my-assessment
-        clientToken:
-          type: string
-        tags:
-          type: object
-          additionalProperties:
-            type: string
   securitySchemes:
     aws_signature:
       type: apiKey

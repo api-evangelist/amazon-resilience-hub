@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Resilience Hub Applications Tags API
+  title: Amazon Resilience Hub Tags API
   description: AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications, assessing against RTO and RPO targets and providing actionable recommendations.
   version: '2020-04-30'
   contact:
@@ -109,18 +109,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    TagResourceRequest:
-      type: object
-      required:
-      - tags
-      properties:
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-    EmptyResponse:
-      type: object
-      properties: {}
     ErrorResponse:
       type: object
       description: Standard error response from Amazon Resilience Hub.
@@ -134,6 +122,18 @@ components:
           description: Error code.
     ListTagsResponse:
       type: object
+      properties:
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+    EmptyResponse:
+      type: object
+      properties: {}
+    TagResourceRequest:
+      type: object
+      required:
+      - tags
       properties:
         tags:
           type: object

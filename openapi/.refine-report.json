@@ -1,12 +1,7 @@
 {
   "provider": "amazon-resilience-hub",
   "sources": [
-    "amazon-resilience-hub-applications-api-openapi.yml",
-    "amazon-resilience-hub-assessments-api-openapi.yml",
-    "amazon-resilience-hub-recommendations-api-openapi.yml",
-    "amazon-resilience-hub-resiliency-policies-api-openapi.yml",
-    "amazon-resilience-hub-resource-management-api-openapi.yml",
-    "amazon-resilience-hub-tags-api-openapi.yml"
+    "_ae-authored/amazon-resilience-hub-openapi.yml"
   ],
   "outputs": [
     "amazon-resilience-hub-applications-api-openapi.yml",
@@ -20,7 +15,16 @@
   "errors": [],
   "warnings": [],
   "notes": [
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "amazon-resilience-hub-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "amazon-resilience-hub-applications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-resilience-hub-assessments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-resilience-hub-recommendations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-resilience-hub-resiliency-policies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-resilience-hub-resource-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-resilience-hub-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

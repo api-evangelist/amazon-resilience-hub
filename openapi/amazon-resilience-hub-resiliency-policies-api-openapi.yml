@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Resilience Hub Applications Resiliency Policies API
+  title: Amazon Resilience Hub Resiliency Policies API
   description: AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications, assessing against RTO and RPO targets and providing actionable recommendations.
   version: '2020-04-30'
   contact:
@@ -208,6 +208,22 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response from Amazon Resilience Hub.
+      properties:
+        message:
+          type: string
+          description: Error message.
+          example: An error occurred.
+        code:
+          type: string
+          description: Error code.
+    CreateResiliencyPolicyResponse:
+      type: object
+      properties:
+        policy:
+          $ref: '#/components/schemas/ResiliencyPolicy'
     CreateResiliencyPolicyRequest:
       type: object
       required:
@@ -247,15 +263,6 @@ components:
           type: object
           additionalProperties:
             type: string
-    PolicyArnRequest:
-      type: object
-      required:
-      - policyArn
-      properties:
-        policyArn:
-          type: string
-          description: The Amazon Resource Name (ARN) of the resiliency policy.
-          example: arn:aws:resiliencehub:us-east-1:123456789012:resiliency-policy/abc123
     ResiliencyPolicy:
       type: object
       description: Defines a resiliency policy with RTO and RPO targets per disruption type.
@@ -311,22 +318,6 @@ components:
             $ref: '#/components/schemas/ResiliencyPolicy'
         nextToken:
           type: string
-    ErrorResponse:
-      type: object
-      description: Standard error response from Amazon Resilience Hub.
-      properties:
-        message:
-          type: string
-          description: Error message.
-          example: An error occurred.
-        code:
-          type: string
-          description: Error code.
-    CreateResiliencyPolicyResponse:
-      type: object
-      properties:
-        policy:
-          $ref: '#/components/schemas/ResiliencyPolicy'
     ResiliencyTargets:
       type: object
       description: Defines RTO and RPO targets for a disruption type.
@@ -339,6 +330,15 @@ components:
           type: integer
           description: Recovery Point Objective in seconds.
           example: 60
+    PolicyArnRequest:
+      type: object
+      required:
+      - policyArn
+      properties:
+        policyArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the resiliency policy.
+          example: arn:aws:resiliencehub:us-east-1:123456789012:resiliency-policy/abc123
     DescribeResiliencyPolicyResponse:
       type: object
       properties:
