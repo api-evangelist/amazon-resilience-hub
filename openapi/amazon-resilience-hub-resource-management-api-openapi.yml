@@ -169,6 +169,20 @@ components:
         code:
           type: string
           description: Error code.
+    ImportResourcesResponse:
+      type: object
+      properties:
+        appArn:
+          type: string
+        appVersion:
+          type: string
+        status:
+          type: string
+          enum:
+          - Pending
+          - InProgress
+          - Failed
+          - Success
     ResolveResourcesResponse:
       type: object
       properties:
@@ -185,56 +199,6 @@ components:
           - InProgress
           - Failed
           - Success
-    ImportResourcesRequest:
-      type: object
-      required:
-      - appArn
-      properties:
-        appArn:
-          type: string
-        sourceArns:
-          type: array
-          items:
-            type: string
-        terraformSources:
-          type: array
-          items:
-            type: object
-            properties:
-              s3StateFileUrl:
-                type: string
-        importStrategy:
-          type: string
-          enum:
-          - AddOnly
-          - ReplaceAll
-        eksSources:
-          type: array
-          items:
-            type: object
-    AddResourceMappingsResponse:
-      type: object
-      properties:
-        appArn:
-          type: string
-        appVersion:
-          type: string
-        resourceMappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceMapping'
-    AddResourceMappingsRequest:
-      type: object
-      required:
-      - appArn
-      - resourceMappings
-      properties:
-        appArn:
-          type: string
-        resourceMappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceMapping'
     AppVersionRequest:
       type: object
       required:
@@ -277,20 +241,56 @@ components:
           type: string
         resourceGroupName:
           type: string
-    ImportResourcesResponse:
+    AddResourceMappingsRequest:
+      type: object
+      required:
+      - appArn
+      - resourceMappings
+      properties:
+        appArn:
+          type: string
+        resourceMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceMapping'
+    AddResourceMappingsResponse:
       type: object
       properties:
         appArn:
           type: string
         appVersion:
           type: string
-        status:
+        resourceMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceMapping'
+    ImportResourcesRequest:
+      type: object
+      required:
+      - appArn
+      properties:
+        appArn:
+          type: string
+        sourceArns:
+          type: array
+          items:
+            type: string
+        terraformSources:
+          type: array
+          items:
+            type: object
+            properties:
+              s3StateFileUrl:
+                type: string
+        importStrategy:
           type: string
           enum:
-          - Pending
-          - InProgress
-          - Failed
-          - Success
+          - AddOnly
+          - ReplaceAll
+        eksSources:
+          type: array
+          items:
+            type: object
   securitySchemes:
     aws_signature:
       type: apiKey
