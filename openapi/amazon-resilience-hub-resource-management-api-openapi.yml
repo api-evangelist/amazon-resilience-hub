@@ -158,17 +158,29 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
+    AddResourceMappingsRequest:
       type: object
-      description: Standard error response from Amazon Resilience Hub.
+      required:
+      - appArn
+      - resourceMappings
       properties:
-        message:
+        appArn:
           type: string
-          description: Error message.
-          example: An error occurred.
-        code:
+        resourceMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceMapping'
+    AppVersionRequest:
+      type: object
+      required:
+      - appArn
+      - appVersion
+      properties:
+        appArn:
           type: string
-          description: Error code.
+        appVersion:
+          type: string
+          example: release
     ImportResourcesResponse:
       type: object
       properties:
@@ -183,6 +195,33 @@ components:
           - InProgress
           - Failed
           - Success
+    ImportResourcesRequest:
+      type: object
+      required:
+      - appArn
+      properties:
+        appArn:
+          type: string
+        sourceArns:
+          type: array
+          items:
+            type: string
+        terraformSources:
+          type: array
+          items:
+            type: object
+            properties:
+              s3StateFileUrl:
+                type: string
+        importStrategy:
+          type: string
+          enum:
+          - AddOnly
+          - ReplaceAll
+        eksSources:
+          type: array
+          items:
+            type: object
     ResolveResourcesResponse:
       type: object
       properties:
@@ -199,17 +238,6 @@ components:
           - InProgress
           - Failed
           - Success
-    AppVersionRequest:
-      type: object
-      required:
-      - appArn
-      - appVersion
-      properties:
-        appArn:
-          type: string
-        appVersion:
-          type: string
-          example: release
     ResourceMapping:
       type: object
       description: Defines a resource mapping for an app version.
@@ -241,18 +269,6 @@ components:
           type: string
         resourceGroupName:
           type: string
-    AddResourceMappingsRequest:
-      type: object
-      required:
-      - appArn
-      - resourceMappings
-      properties:
-        appArn:
-          type: string
-        resourceMappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceMapping'
     AddResourceMappingsResponse:
       type: object
       properties:
@@ -264,33 +280,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ResourceMapping'
-    ImportResourcesRequest:
+    ErrorResponse:
       type: object
-      required:
-      - appArn
+      description: Standard error response from Amazon Resilience Hub.
       properties:
-        appArn:
+        message:
           type: string
-        sourceArns:
-          type: array
-          items:
-            type: string
-        terraformSources:
-          type: array
-          items:
-            type: object
-            properties:
-              s3StateFileUrl:
-                type: string
-        importStrategy:
+          description: Error message.
+          example: An error occurred.
+        code:
           type: string
-          enum:
-          - AddOnly
-          - ReplaceAll
-        eksSources:
-          type: array
-          items:
-            type: object
+          description: Error code.
   securitySchemes:
     aws_signature:
       type: apiKey

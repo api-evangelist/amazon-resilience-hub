@@ -177,6 +177,39 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ListAppAssessmentsResponse:
+      type: object
+      properties:
+        assessmentSummaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Assessment'
+        nextToken:
+          type: string
+    StartAppAssessmentRequest:
+      type: object
+      required:
+      - appArn
+      - appVersion
+      - assessmentName
+      properties:
+        appArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the application.
+        appVersion:
+          type: string
+          description: The version of the application.
+          example: release
+        assessmentName:
+          type: string
+          description: The name for the assessment.
+          example: my-assessment
+        clientToken:
+          type: string
+        tags:
+          type: object
+          additionalProperties:
+            type: string
     Assessment:
       type: object
       description: Defines an assessment for an AWS Resilience Hub application.
@@ -232,6 +265,16 @@ components:
           type: object
           additionalProperties:
             type: string
+    DescribeAppAssessmentResponse:
+      type: object
+      properties:
+        assessment:
+          $ref: '#/components/schemas/Assessment'
+    StartAppAssessmentResponse:
+      type: object
+      properties:
+        assessment:
+          $ref: '#/components/schemas/Assessment'
     ErrorResponse:
       type: object
       description: Standard error response from Amazon Resilience Hub.
@@ -243,11 +286,6 @@ components:
         code:
           type: string
           description: Error code.
-    StartAppAssessmentResponse:
-      type: object
-      properties:
-        assessment:
-          $ref: '#/components/schemas/Assessment'
     AssessmentArnRequest:
       type: object
       required:
@@ -257,44 +295,6 @@ components:
           type: string
           description: The Amazon Resource Name (ARN) of the assessment.
           example: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
-    StartAppAssessmentRequest:
-      type: object
-      required:
-      - appArn
-      - appVersion
-      - assessmentName
-      properties:
-        appArn:
-          type: string
-          description: The Amazon Resource Name (ARN) of the application.
-        appVersion:
-          type: string
-          description: The version of the application.
-          example: release
-        assessmentName:
-          type: string
-          description: The name for the assessment.
-          example: my-assessment
-        clientToken:
-          type: string
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-    ListAppAssessmentsResponse:
-      type: object
-      properties:
-        assessmentSummaries:
-          type: array
-          items:
-            $ref: '#/components/schemas/Assessment'
-        nextToken:
-          type: string
-    DescribeAppAssessmentResponse:
-      type: object
-      properties:
-        assessment:
-          $ref: '#/components/schemas/Assessment'
   securitySchemes:
     aws_signature:
       type: apiKey
