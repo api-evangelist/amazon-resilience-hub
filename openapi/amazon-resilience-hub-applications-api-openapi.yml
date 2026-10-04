@@ -303,23 +303,22 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ListAppVersionsResponse:
+    AppArnRequest:
       type: object
+      required:
+      - appArn
+      description: Request containing an application ARN.
       properties:
-        appVersions:
-          type: array
-          items:
-            type: object
-            properties:
-              appVersion:
-                type: string
-              identifier:
-                type: integer
-              creationTime:
-                type: string
-                format: date-time
-        nextToken:
+        appArn:
           type: string
+          description: The Amazon Resource Name (ARN) of the application.
+          example: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
+    CreateAppResponse:
+      type: object
+      description: Response from creating an application.
+      properties:
+        app:
+          $ref: '#/components/schemas/App'
     App:
       type: object
       description: Defines an AWS Resilience Hub application.
@@ -363,35 +362,23 @@ components:
           enum:
           - Disabled
           - Daily
-    ListAppsResponse:
+    ListAppVersionsResponse:
       type: object
       properties:
-        appSummaries:
+        appVersions:
           type: array
-          description: The summaries for the Resilience Hub application.
           items:
-            $ref: '#/components/schemas/App'
+            type: object
+            properties:
+              appVersion:
+                type: string
+              identifier:
+                type: integer
+              creationTime:
+                type: string
+                format: date-time
         nextToken:
           type: string
-    DeleteAppResponse:
-      type: object
-      properties:
-        appArn:
-          type: string
-    DescribeAppResponse:
-      type: object
-      properties:
-        app:
-          $ref: '#/components/schemas/App'
-    PublishAppVersionResponse:
-      type: object
-      properties:
-        appArn:
-          type: string
-        appVersion:
-          type: string
-        identifier:
-          type: integer
     CreateAppRequest:
       type: object
       required:
@@ -419,6 +406,15 @@ components:
           - Daily
         clientToken:
           type: string
+    PublishAppVersionResponse:
+      type: object
+      properties:
+        appArn:
+          type: string
+        appVersion:
+          type: string
+        identifier:
+          type: integer
     ErrorResponse:
       type: object
       description: Standard error response from Amazon Resilience Hub.
@@ -430,19 +426,23 @@ components:
         code:
           type: string
           description: Error code.
-    AppArnRequest:
+    DeleteAppResponse:
       type: object
-      required:
-      - appArn
-      description: Request containing an application ARN.
       properties:
         appArn:
           type: string
-          description: The Amazon Resource Name (ARN) of the application.
-          example: arn:aws:resiliencehub:us-east-1:123456789012:app/my-app
-    CreateAppResponse:
+    ListAppsResponse:
       type: object
-      description: Response from creating an application.
+      properties:
+        appSummaries:
+          type: array
+          description: The summaries for the Resilience Hub application.
+          items:
+            $ref: '#/components/schemas/App'
+        nextToken:
+          type: string
+    DescribeAppResponse:
+      type: object
       properties:
         app:
           $ref: '#/components/schemas/App'

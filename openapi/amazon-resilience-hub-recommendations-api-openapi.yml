@@ -152,17 +152,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: Standard error response from Amazon Resilience Hub.
-      properties:
-        message:
-          type: string
-          description: Error message.
-          example: An error occurred.
-        code:
-          type: string
-          description: Error code.
     ListRecommendationsResponse:
       type: object
       properties:
@@ -180,6 +169,17 @@ components:
             type: object
         nextToken:
           type: string
+    ErrorResponse:
+      type: object
+      description: Standard error response from Amazon Resilience Hub.
+      properties:
+        message:
+          type: string
+          description: Error message.
+          example: An error occurred.
+        code:
+          type: string
+          description: Error code.
     AssessmentArnPaginationRequest:
       type: object
       required:

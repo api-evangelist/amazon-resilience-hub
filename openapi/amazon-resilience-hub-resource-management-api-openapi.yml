@@ -158,35 +158,56 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AddResourceMappingsRequest:
+    AddResourceMappingsResponse:
       type: object
-      required:
-      - appArn
-      - resourceMappings
       properties:
         appArn:
+          type: string
+        appVersion:
           type: string
         resourceMappings:
           type: array
           items:
             $ref: '#/components/schemas/ResourceMapping'
-    AppVersionRequest:
+    ResourceMapping:
       type: object
-      required:
-      - appArn
-      - appVersion
+      description: Defines a resource mapping for an app version.
+      properties:
+        resourceName:
+          type: string
+        logicalStackName:
+          type: string
+        mappingType:
+          type: string
+          enum:
+          - CfnStack
+          - Resource
+          - AppRegistryApp
+          - ResourceGroup
+          - Terraform
+          - EKS
+        physicalResourceId:
+          type: object
+          properties:
+            identifier:
+              type: string
+            type:
+              type: string
+              enum:
+              - Arn
+              - Native
+        appRegistryAppName:
+          type: string
+        resourceGroupName:
+          type: string
+    ResolveResourcesResponse:
+      type: object
       properties:
         appArn:
           type: string
         appVersion:
           type: string
-          example: release
-    ImportResourcesResponse:
-      type: object
-      properties:
-        appArn:
-          type: string
-        appVersion:
+        resolutionId:
           type: string
         status:
           type: string
@@ -222,14 +243,12 @@ components:
           type: array
           items:
             type: object
-    ResolveResourcesResponse:
+    ImportResourcesResponse:
       type: object
       properties:
         appArn:
           type: string
         appVersion:
-          type: string
-        resolutionId:
           type: string
         status:
           type: string
@@ -238,48 +257,6 @@ components:
           - InProgress
           - Failed
           - Success
-    ResourceMapping:
-      type: object
-      description: Defines a resource mapping for an app version.
-      properties:
-        resourceName:
-          type: string
-        logicalStackName:
-          type: string
-        mappingType:
-          type: string
-          enum:
-          - CfnStack
-          - Resource
-          - AppRegistryApp
-          - ResourceGroup
-          - Terraform
-          - EKS
-        physicalResourceId:
-          type: object
-          properties:
-            identifier:
-              type: string
-            type:
-              type: string
-              enum:
-              - Arn
-              - Native
-        appRegistryAppName:
-          type: string
-        resourceGroupName:
-          type: string
-    AddResourceMappingsResponse:
-      type: object
-      properties:
-        appArn:
-          type: string
-        appVersion:
-          type: string
-        resourceMappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceMapping'
     ErrorResponse:
       type: object
       description: Standard error response from Amazon Resilience Hub.
@@ -291,6 +268,29 @@ components:
         code:
           type: string
           description: Error code.
+    AppVersionRequest:
+      type: object
+      required:
+      - appArn
+      - appVersion
+      properties:
+        appArn:
+          type: string
+        appVersion:
+          type: string
+          example: release
+    AddResourceMappingsRequest:
+      type: object
+      required:
+      - appArn
+      - resourceMappings
+      properties:
+        appArn:
+          type: string
+        resourceMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceMapping'
   securitySchemes:
     aws_signature:
       type: apiKey

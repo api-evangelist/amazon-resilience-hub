@@ -116,6 +116,18 @@ components:
           type: object
           additionalProperties:
             type: string
+    TagResourceRequest:
+      type: object
+      required:
+      - tags
+      properties:
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+    EmptyResponse:
+      type: object
+      properties: {}
     ErrorResponse:
       type: object
       description: Standard error response from Amazon Resilience Hub.
@@ -127,18 +139,6 @@ components:
         code:
           type: string
           description: Error code.
-    EmptyResponse:
-      type: object
-      properties: {}
-    TagResourceRequest:
-      type: object
-      required:
-      - tags
-      properties:
-        tags:
-          type: object
-          additionalProperties:
-            type: string
   securitySchemes:
     aws_signature:
       type: apiKey

@@ -265,12 +265,12 @@ components:
           type: object
           additionalProperties:
             type: string
-    DescribeAppAssessmentResponse:
+    StartAppAssessmentResponse:
       type: object
       properties:
         assessment:
           $ref: '#/components/schemas/Assessment'
-    StartAppAssessmentResponse:
+    DescribeAppAssessmentResponse:
       type: object
       properties:
         assessment:
