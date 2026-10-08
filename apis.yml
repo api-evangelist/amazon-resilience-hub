@@ -161,6 +161,12 @@ apis:
   - type: FAQ
     url: https://aws.amazon.com/resilience-hub/faqs/
 common:
+  - type: Plans
+    url: plans/amazon-resilience-hub-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/amazon-resilience-hub-rate-limits.yml
+  - type: FinOps
+    url: finops/amazon-resilience-hub-finops.yml
   - type: AgenticAccess
     url: agentic-access/amazon-resilience-hub-agentic-access.yml
   - type: TrustCenter
