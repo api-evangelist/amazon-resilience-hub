@@ -169,6 +169,45 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ResourceMapping'
+    AppVersionRequest:
+      type: object
+      required:
+      - appArn
+      - appVersion
+      properties:
+        appArn:
+          type: string
+        appVersion:
+          type: string
+          example: release
+    ResolveResourcesResponse:
+      type: object
+      properties:
+        appArn:
+          type: string
+        appVersion:
+          type: string
+        resolutionId:
+          type: string
+        status:
+          type: string
+          enum:
+          - Pending
+          - InProgress
+          - Failed
+          - Success
+    AddResourceMappingsRequest:
+      type: object
+      required:
+      - appArn
+      - resourceMappings
+      properties:
+        appArn:
+          type: string
+        resourceMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceMapping'
     ResourceMapping:
       type: object
       description: Defines a resource mapping for an app version.
@@ -200,22 +239,6 @@ components:
           type: string
         resourceGroupName:
           type: string
-    ResolveResourcesResponse:
-      type: object
-      properties:
-        appArn:
-          type: string
-        appVersion:
-          type: string
-        resolutionId:
-          type: string
-        status:
-          type: string
-          enum:
-          - Pending
-          - InProgress
-          - Failed
-          - Success
     ImportResourcesRequest:
       type: object
       required:
@@ -268,29 +291,6 @@ components:
         code:
           type: string
           description: Error code.
-    AppVersionRequest:
-      type: object
-      required:
-      - appArn
-      - appVersion
-      properties:
-        appArn:
-          type: string
-        appVersion:
-          type: string
-          example: release
-    AddResourceMappingsRequest:
-      type: object
-      required:
-      - appArn
-      - resourceMappings
-      properties:
-        appArn:
-          type: string
-        resourceMappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceMapping'
   securitySchemes:
     aws_signature:
       type: apiKey

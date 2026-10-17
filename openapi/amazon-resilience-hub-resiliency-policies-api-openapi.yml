@@ -208,24 +208,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ListResiliencyPoliciesResponse:
-      type: object
-      properties:
-        resiliencyPolicies:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResiliencyPolicy'
-        nextToken:
-          type: string
-    PolicyArnRequest:
-      type: object
-      required:
-      - policyArn
-      properties:
-        policyArn:
-          type: string
-          description: The Amazon Resource Name (ARN) of the resiliency policy.
-          example: arn:aws:resiliencehub:us-east-1:123456789012:resiliency-policy/abc123
     ResiliencyPolicy:
       type: object
       description: Defines a resiliency policy with RTO and RPO targets per disruption type.
@@ -272,39 +254,34 @@ components:
           type: object
           additionalProperties:
             type: string
+    ListResiliencyPoliciesResponse:
+      type: object
+      properties:
+        resiliencyPolicies:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResiliencyPolicy'
+        nextToken:
+          type: string
     DescribeResiliencyPolicyResponse:
       type: object
       properties:
         policy:
           $ref: '#/components/schemas/ResiliencyPolicy'
+    PolicyArnRequest:
+      type: object
+      required:
+      - policyArn
+      properties:
+        policyArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the resiliency policy.
+          example: arn:aws:resiliencehub:us-east-1:123456789012:resiliency-policy/abc123
     CreateResiliencyPolicyResponse:
       type: object
       properties:
         policy:
           $ref: '#/components/schemas/ResiliencyPolicy'
-    ResiliencyTargets:
-      type: object
-      description: Defines RTO and RPO targets for a disruption type.
-      properties:
-        rtoInSecs:
-          type: integer
-          description: Recovery Time Objective in seconds.
-          example: 300
-        rpoInSecs:
-          type: integer
-          description: Recovery Point Objective in seconds.
-          example: 60
-    ErrorResponse:
-      type: object
-      description: Standard error response from Amazon Resilience Hub.
-      properties:
-        message:
-          type: string
-          description: Error message.
-          example: An error occurred.
-        code:
-          type: string
-          description: Error code.
     CreateResiliencyPolicyRequest:
       type: object
       required:
@@ -344,6 +321,29 @@ components:
           type: object
           additionalProperties:
             type: string
+    ErrorResponse:
+      type: object
+      description: Standard error response from Amazon Resilience Hub.
+      properties:
+        message:
+          type: string
+          description: Error message.
+          example: An error occurred.
+        code:
+          type: string
+          description: Error code.
+    ResiliencyTargets:
+      type: object
+      description: Defines RTO and RPO targets for a disruption type.
+      properties:
+        rtoInSecs:
+          type: integer
+          description: Recovery Time Objective in seconds.
+          example: 300
+        rpoInSecs:
+          type: integer
+          description: Recovery Point Objective in seconds.
+          example: 60
   securitySchemes:
     aws_signature:
       type: apiKey

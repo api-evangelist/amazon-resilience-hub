@@ -177,15 +177,11 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ListAppAssessmentsResponse:
+    DescribeAppAssessmentResponse:
       type: object
       properties:
-        assessmentSummaries:
-          type: array
-          items:
-            $ref: '#/components/schemas/Assessment'
-        nextToken:
-          type: string
+        assessment:
+          $ref: '#/components/schemas/Assessment'
     StartAppAssessmentRequest:
       type: object
       required:
@@ -210,6 +206,20 @@ components:
           type: object
           additionalProperties:
             type: string
+    StartAppAssessmentResponse:
+      type: object
+      properties:
+        assessment:
+          $ref: '#/components/schemas/Assessment'
+    AssessmentArnRequest:
+      type: object
+      required:
+      - assessmentArn
+      properties:
+        assessmentArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the assessment.
+          example: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
     Assessment:
       type: object
       description: Defines an assessment for an AWS Resilience Hub application.
@@ -265,16 +275,6 @@ components:
           type: object
           additionalProperties:
             type: string
-    StartAppAssessmentResponse:
-      type: object
-      properties:
-        assessment:
-          $ref: '#/components/schemas/Assessment'
-    DescribeAppAssessmentResponse:
-      type: object
-      properties:
-        assessment:
-          $ref: '#/components/schemas/Assessment'
     ErrorResponse:
       type: object
       description: Standard error response from Amazon Resilience Hub.
@@ -286,15 +286,15 @@ components:
         code:
           type: string
           description: Error code.
-    AssessmentArnRequest:
+    ListAppAssessmentsResponse:
       type: object
-      required:
-      - assessmentArn
       properties:
-        assessmentArn:
+        assessmentSummaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Assessment'
+        nextToken:
           type: string
-          description: The Amazon Resource Name (ARN) of the assessment.
-          example: arn:aws:resiliencehub:us-east-1:123456789012:app-assessment/abc123
   securitySchemes:
     aws_signature:
       type: apiKey
