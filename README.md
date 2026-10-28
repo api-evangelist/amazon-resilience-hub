@@ -1,4 +1,4 @@
-# Amazon Resilience Hub (amazon-resilience-hub)
+# Amazon Resilience Hub
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,68 +66,135 @@
 
 AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications. It assesses your application against your Recovery Time Objective (RTO) and Recovery Point Objective (RPO) targets and provides actionable recommendations to improve resilience.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/amazon-resilience-hub/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/amazon-resilience-hub/refs/heads/main/apis.yml)
+**Areas:** AWS · Disaster Recovery · High Availability · Resilience
 
-## Scope
+## Amazon Resilience Hub on APIs.io
 
-- **Type:** Index
+Everything profiled for Amazon Resilience Hub is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/amazon-resilience-hub/](https://apis.io/providers/amazon-resilience-hub/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (7)
 
-- AWS
-- Disaster Recovery
-- High Availability
-- Operations
-- Resilience
+- [Amazon Resilience Hub Applications API](https://apis.io/apis/amazon-resilience-hub/amazon-resilience-hub-applications-api/) — Create and manage Resilience Hub applications.
+- [Amazon Resilience Hub Assessments API](https://apis.io/apis/amazon-resilience-hub/amazon-resilience-hub-assessments-api/) — Run and retrieve resilience assessments.
+- [Amazon Resilience Hub Recommendations API](https://apis.io/apis/amazon-resilience-hub/amazon-resilience-hub-recommendations-api/) — Retrieve alarm, SOP, and test recommendations.
+- [Amazon Resilience Hub Resiliency Policies API](https://apis.io/apis/amazon-resilience-hub/amazon-resilience-hub-resiliency-policies-api/) — Define RTO and RPO targets for applications.
+- [Amazon Resilience Hub Resource Management API](https://apis.io/apis/amazon-resilience-hub/amazon-resilience-hub-resource-management-api/) — Map and import resources into app versions.
+- [Amazon Resilience Hub Tags API](https://apis.io/apis/amazon-resilience-hub/amazon-resilience-hub-tags-api/) — Manage resource tags.
+- [Amazon Resilience Hub Resilience Hub Operations API](https://apis.io/apis/amazon-resilience-hub/amazon-resilience-hub-operations-api/) — The Resilience Hub Operations API from Amazon Resilience Hub — 41 operation(s) for resilience hub operations.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-16
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### AWS Resilience Hub API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The AWS Resilience Hub API provides programmatic access to create and manage applications, app assessments, resiliency policies, and recommendations for improving application resilience against disruptions.
+- [Amazon Resilience Hub Agentic Access](https://apis.io/agentic-access/amazon-resilience-hub/amazon-resilience-hub-agentic-access/)
 
-- **Human URL:** [https://aws.amazon.com/resilience-hub/](https://aws.amazon.com/resilience-hub/)
-- **Base URL:** `https://resiliencehub.amazonaws.com`
+#### Collections (7)
 
-#### Tags
+Postman and Open Collection request collections.
 
-- Disaster Recovery
-- High Availability
-- Resilience
+- [Amazon Resilience Hub](https://apis.io/collections/amazon-resilience-hub/open-amazon-resilience-hub/)
+- [Amazon Resilience Hub Applications API](https://apis.io/collections/amazon-resilience-hub/open-amazon-resilience-hub-applications-api/)
+- [Amazon Resilience Hub Applications Assessments API](https://apis.io/collections/amazon-resilience-hub/open-amazon-resilience-hub-assessments-api/)
+- [Amazon Resilience Hub Applications Recommendations API](https://apis.io/collections/amazon-resilience-hub/open-amazon-resilience-hub-recommendations-api/)
+- [Amazon Resilience Hub Applications Resiliency Policies API](https://apis.io/collections/amazon-resilience-hub/open-amazon-resilience-hub-resiliency-policies-api/)
+- [Amazon Resilience Hub Applications Resource Management API](https://apis.io/collections/amazon-resilience-hub/open-amazon-resilience-hub-resource-management-api/)
+- [Amazon Resilience Hub Applications Tags API](https://apis.io/collections/amazon-resilience-hub/open-amazon-resilience-hub-tags-api/)
 
-#### Properties
+#### Security (4)
 
-- [Documentation](https://docs.aws.amazon.com/resilience-hub/latest/APIReference/Welcome.html)
-- [OpenAPI](https://api.apis.guru/v2/specs/amazonaws.com/resiliencehub/2020-04-30/openapi.yaml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Getting Started](https://aws.amazon.com/resilience-hub/getting-started/)
-- [Pricing](https://aws.amazon.com/resilience-hub/pricing/)
-- [F A Q](https://aws.amazon.com/resilience-hub/faqs/)
-- [Postman Collection](collections/amazon-resilience-hub.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amazon-resilience-hub.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Authentication, trust centre, and vulnerability disclosure.
 
-## Common Properties
+- [Amazon Resilience Hub Authentication](https://apis.io/security/amazon-resilience-hub/amazon-resilience-hub-authentication/)
+- [Amazon Resilience Hub Domain Security](https://apis.io/security/amazon-resilience-hub/amazon-resilience-hub-domain-security/)
+- [Amazon Resilience Hub Trust Center](https://apis.io/security/amazon-resilience-hub/amazon-resilience-hub-trust-center/)
+- [Amazon Resilience Hub Vulnerability Disclosure](https://apis.io/security/amazon-resilience-hub/amazon-resilience-hub-vulnerability-disclosure/)
 
-- [Portal](https://aws.amazon.com/resilience-hub/)
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Amazon Resilience Hub Plans Pricing](https://apis.io/plans/amazon-resilience-hub/amazon-resilience-hub-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Amazon Resilience Hub Rate Limits](https://apis.io/rate-limits/amazon-resilience-hub/amazon-resilience-hub-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Amazon Resilience Hub Finops](https://apis.io/finops/amazon-resilience-hub/amazon-resilience-hub-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://aws.amazon.com/resilience-hub/)
 - [Documentation](https://docs.aws.amazon.com/resilience-hub/)
-- [Terms of Service](https://aws.amazon.com/service-terms/)
-- [Privacy Policy](https://aws.amazon.com/privacy/)
 - [Support](https://aws.amazon.com/premiumsupport/)
 - [Blog](https://aws.amazon.com/blogs/architecture/tag/aws-resilience-hub/)
-- [GitHub Organization](https://github.com/aws)
-- [Console](https://console.aws.amazon.com/resiliencehub/)
-- [Sign Up](https://portal.aws.amazon.com/billing/signup)
-- [Login](https://signin.aws.amazon.com/)
-- [Status Page](https://health.aws.amazon.com/health/status)
-- [Contact](https://aws.amazon.com/contact-us/)
-- [Integrations](https://aws.amazon.com/partners/)
+- [Terms of service](https://aws.amazon.com/service-terms/)
+- [Privacy policy](https://aws.amazon.com/privacy/)
+- [GitHub](https://github.com/aws)
+- [Status](https://health.aws.amazon.com/health/status)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 35.6** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 14.5 |
+| Contract governance | 0.0 |
+| Operational transparency | 36.8 |
+| Developer ergonomics | 42.9 |
+| Access clarity | 53.9 |
+
+**Agent readiness 30.2** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 30.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/amazon-resilience-hub/](https://apis.io/providers/amazon-resilience-hub/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Amazon Resilience Hub: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/amazon-resilience-hub/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
