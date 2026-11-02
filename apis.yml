@@ -1,0 +1,233 @@
+aid: amazon-resilience-hub
+name: Amazon Resilience Hub
+description: >-
+  AWS Resilience Hub provides a central place to define, validate, and track the resilience of your AWS applications. It
+  assesses your application against your Recovery Time Objective (RTO) and Recovery Point Objective (RPO) targets and
+  provides actionable recommendations to improve resilience.
+type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: medium
+  source:
+  - plans
+  - authentication
+  - security
+  generated: '2026-09-03'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/amazon-resilience-hub.png
+tags:
+  - Amazon Web Services
+  - Disaster Recovery
+  - High Availability
+  - Resilience
+tags_raw:
+  - AWS
+  - Disaster Recovery
+  - High Availability
+  - Operations
+  - Resilience
+url: https://raw.githubusercontent.com/api-evangelist/amazon-resilience-hub/refs/heads/main/apis.yml
+created: '2026-03-16'
+modified: '2026-05-19'
+specificationVersion: '0.23'
+apis:
+- aid: amazon-resilience-hub:amazon-resilience-hub-applications-api
+  name: Amazon Resilience Hub Applications API
+  description: Create and manage Resilience Hub applications.
+  humanURL: https://aws.amazon.com/resilience-hub/
+  baseURL: https://resiliencehub.amazonaws.com
+  tags:
+  - Application
+  tags_raw:
+  - Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-resilience-hub-applications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/resilience-hub/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/resilience-hub/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/resilience-hub/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/resilience-hub/faqs/
+- aid: amazon-resilience-hub:amazon-resilience-hub-assessments-api
+  name: Amazon Resilience Hub Assessments API
+  description: Run and retrieve resilience assessments.
+  humanURL: https://aws.amazon.com/resilience-hub/
+  baseURL: https://resiliencehub.amazonaws.com
+  tags:
+  - Assessment
+  tags_raw:
+  - Assessments
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-resilience-hub-assessments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/resilience-hub/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/resilience-hub/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/resilience-hub/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/resilience-hub/faqs/
+- aid: amazon-resilience-hub:amazon-resilience-hub-recommendations-api
+  name: Amazon Resilience Hub Recommendations API
+  description: Retrieve alarm, SOP, and test recommendations.
+  humanURL: https://aws.amazon.com/resilience-hub/
+  baseURL: https://resiliencehub.amazonaws.com
+  tags:
+  - Recommendations
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-resilience-hub-recommendations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/resilience-hub/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/resilience-hub/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/resilience-hub/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/resilience-hub/faqs/
+- aid: amazon-resilience-hub:amazon-resilience-hub-resiliency-policies-api
+  name: Amazon Resilience Hub Resiliency Policies API
+  description: Define RTO and RPO targets for applications.
+  humanURL: https://aws.amazon.com/resilience-hub/
+  baseURL: https://resiliencehub.amazonaws.com
+  tags:
+  - Resiliency Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-resilience-hub-resiliency-policies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/resilience-hub/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/resilience-hub/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/resilience-hub/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/resilience-hub/faqs/
+- aid: amazon-resilience-hub:amazon-resilience-hub-resource-management-api
+  name: Amazon Resilience Hub Resource Management API
+  description: Map and import resources into app versions.
+  humanURL: https://aws.amazon.com/resilience-hub/
+  baseURL: https://resiliencehub.amazonaws.com
+  tags:
+  - Resource Management
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-resilience-hub-resource-management-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/resilience-hub/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/resilience-hub/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/resilience-hub/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/resilience-hub/faqs/
+- aid: amazon-resilience-hub:amazon-resilience-hub-tags-api
+  name: Amazon Resilience Hub Tags API
+  description: Manage resource tags.
+  humanURL: https://aws.amazon.com/resilience-hub/
+  baseURL: https://resiliencehub.amazonaws.com
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-resilience-hub-tags-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/resilience-hub/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/resilience-hub/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/resilience-hub/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/resilience-hub/faqs/
+- aid: amazon-resilience-hub:amazon-resilience-hub-operations-api
+  name: Amazon Resilience Hub Resilience Hub Operations API
+  description: >-
+    The Resilience Hub Operations API from Amazon Resilience Hub — 41 operation(s) for resilience hub
+    operations.
+  humanURL: https://aws.amazon.com/resilience-hub/
+  baseURL: https://resiliencehub.amazonaws.com
+  tags:
+  - Resilience Hub Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-resilience-hub-operations-api-openapi.yml
+common:
+  - type: Plans
+    url: plans/amazon-resilience-hub-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/amazon-resilience-hub-rate-limits.yml
+  - type: FinOps
+    url: finops/amazon-resilience-hub-finops.yml
+  - type: AgenticAccess
+    url: agentic-access/amazon-resilience-hub-agentic-access.yml
+  - type: TrustCenter
+    url: security/amazon-resilience-hub-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/amazon-resilience-hub-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/amazon-resilience-hub-domain-security.yml
+  - type: Authentication
+    url: authentication/amazon-resilience-hub-authentication.yml
+  - type: Portal
+    url: https://aws.amazon.com/resilience-hub/
+  - type: Website
+    url: https://aws.amazon.com/resilience-hub/
+  - type: Documentation
+    url: https://docs.aws.amazon.com/resilience-hub/
+  - type: TermsOfService
+    url: https://aws.amazon.com/service-terms/
+  - type: PrivacyPolicy
+    url: https://aws.amazon.com/privacy/
+  - type: Support
+    url: https://aws.amazon.com/premiumsupport/
+  - type: Blog
+    url: https://aws.amazon.com/blogs/architecture/tag/aws-resilience-hub/
+  - type: GitHubOrganization
+    url: https://github.com/aws
+  - type: Console
+    url: https://console.aws.amazon.com/resiliencehub/
+  - type: Signup
+    url: https://portal.aws.amazon.com/billing/signup
+  - type: Login
+    url: https://signin.aws.amazon.com/
+  - type: StatusPage
+    url: https://health.aws.amazon.com/health/status
+  - type: Contact
+    url: https://aws.amazon.com/contact-us/
+  - type: Integrations
+    url: https://aws.amazon.com/partners/
+integrations:
+  - name: Partner Programs
+  - name: Resources
+  - name: Success Stories
+  - name: Work with an AWS Partner
+  - name: AWS Marketplace
+  - name: AWS Partner Central
+  - name: Partner Paths
+  - name: co-sell with AWS
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+x-parent: amazon-web-services
+x-relationship: product
